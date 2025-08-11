@@ -32,15 +32,20 @@ class ClangFormatter:
             file_ext="m"
         elif syntax == "objective-c++":
             file_ext="mm"
-        if syntax == "C++":
+        if syntax == "c++":
             file_ext="cpp"
-        elif syntax == "C":
+        elif syntax == "c":
             file_ext="c"
         
-        style = self.opts['style']
-        style_str = self.opts[f'style_{file_ext}']
-        if style_str:
-            style = style_str
+
+        style ="Microsoft"
+        if ('style' in self.opts and self.opts['style']):
+            style=self.opts['style']
+        
+        style_key=f'style_{file_ext}'        
+        if (style_key in self.opts and self.opts[style_key]):
+            style = self.opts[style_key]
+
         print(f"syntax {syntax}, style: {style}")
         text = text.decode('utf-8')
         with tempfile.NamedTemporaryFile(mode='w', suffix=f".{file_ext}", delete=False) as temp_file:

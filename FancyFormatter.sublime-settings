@@ -6,12 +6,12 @@
     "formatter_clang_options": {
         //winget install --id=LLVM.ClangFormat -e 
        
-        // syntaxes: c#, java , javascript, typescript, json, objective-c, objective-c++, C, C++
-        "syntaxes": "c#",
+        // syntaxes: c#, java , javascript, typescript, json, objective-c, objective-c++, c, c++
+        "syntaxes": "c#, java, typescript, objective-c, objective-c++, c, c++",
 
         // inner style: LLVM, Google, Chromium, Mozilla, WebKit, Microsoft, GNU
         // or you can define the file:path
-        "style": "LLVM",
+        "style": "Microsoft",
 
         "style_cs":"",
         "style_java":"",
