@@ -1,0 +1,70 @@
+[
+	{
+		"caption": "FancyFormatter: Format Document",
+		"command": "fancy_formatter"
+	},
+	{
+		"caption": "FancyFormatter: Format Open Tabs Code",
+		"command": "fancy_formatter_open_tabs"
+	},
+	{
+		"caption": "FancyFormatter: Format as PHP Syntax",
+		"command": "fancy_formatter",
+		"args": {
+			"syntax": "php"
+		}
+	},
+	{
+		"caption": "FancyFormatter: Format as Javascript Syntax",
+		"command": "fancy_formatter",
+		"args": {
+			"syntax": "javascript"
+		}
+	},
+	{
+		"caption": "FancyFormatter: Format as CSS Syntax",
+		"command": "fancy_formatter",
+		"args": {
+			"syntax": "css"
+		}
+	},
+	{
+		"caption": "FancyFormatter: Format as SCSS Syntax",
+		"command": "fancy_formatter",
+		"args": {
+			"syntax": "scss"
+		}
+	},
+	{
+		"caption": "FancyFormatter: Format as HTML Syntax",
+		"command": "fancy_formatter",
+		"args": {
+			"syntax": "html"
+		}
+	},
+	{
+		"caption": "FancyFormatter: Format as Python Syntax",
+		"command": "fancy_formatter",
+		"args": {
+			"syntax": "python"
+		}
+	},
+	{
+		"caption": "FancyFormatter: Format as VBScript Syntax",
+		"command": "fancy_formatter",
+		"args": {
+			"syntax": "vbscript"
+		}
+	},
+	{
+		"caption": "FancyFormatter: Show PHP Transformations",
+		"command": "fancy_formatter_show_php_transformations"
+	},
+	{
+		"caption": "FancyFormatter: Format as Coldfusion Syntax",
+		"command": "fancy_formatter",
+		"args": {
+			"syntax": "coldfusion"
+		}
+	}
+]
