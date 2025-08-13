@@ -4,3 +4,4 @@
 .cache
 env_py3/
 /FancyFormatter.sublime-package
+.vscode
