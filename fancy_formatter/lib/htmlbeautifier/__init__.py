@@ -3,13 +3,7 @@
 from __future__ import print_function
 import sys
 import re
-import sublime
-try:
-	# Python 3
-	from .__version__ import __version__
-except (ValueError):
-	# Python 2
-	from __version__ import __version__
+from .__version__ import __version__
 
 class BeautifierOptions:
 	def __init__(self):
