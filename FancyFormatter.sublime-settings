@@ -50,21 +50,20 @@
     "jsbeautifier.operator_position": "before-newline", 
  
     //"html","asp","xml"
-    "html.syntaxes": [""], // Syntax names which must process HTML formatter    
+    "html.syntaxes": [], 
     "html.indent_size": 4, 
     "html.indent_char": " ", 
     "html.indent_with_tabs": false,
     "html.exception_on_tag_mismatch": false, 
-    "html.expand_javascript": false,
-    "html.expand_tags": false, 
     "html.minimum_attribute_count": 2,
     "html.first_attribute_on_new_line": false, 
+    "html.expand_tags": false, 
     "html.reduce_empty_tags": false, 
     "html.reduce_whole_word_tags": false, 
     "html.custom_singletons": "", // Custom singleton tags for various template languages outside of the HTML5 spec
 
     //"html","asp","xml"
-    "beautiful_soup.syntaxes":["html","xml"],
+    "beautiful_soup.syntaxes":["html","asp","xml"],
     "beautiful_soup.indent_size": 4,
     
 

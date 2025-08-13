@@ -26,15 +26,14 @@ class HtmlFormatter(IBaseFormatter):
         keys = [            
             'indent_size',
             'indent_char',
+            'indent_with_tabs',
+            'exception_on_tag_mismatch',
             'minimum_attribute_count',
             'first_attribute_on_new_line',
-            'indent_with_tabs',
             'expand_tags',
             'reduce_empty_tags',
             'reduce_whole_word_tags',
-            'exception_on_tag_mismatch',
             'custom_singletons',
-            'format_on_save'
         ]
                 
         for key in keys:             
