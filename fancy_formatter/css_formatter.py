@@ -2,10 +2,9 @@
 # @time         2025-08-13
 # @license      The MIT License (MIT)
 
-import re
-import traceback
+
+from .base import *    
 from .lib.cssbeautifier import *
-from .base import *
 
 
 class CssFormatter:
@@ -15,8 +14,7 @@ class CssFormatter:
         self._debug = debug
 
     def get_support_file_type(self)->List[FileType]:
-        support_list= [
-            FileType.CSS,FileType.LESS]
+        support_list= [FileType.CSS,FileType.LESS]
         ret=[]
         for syntax in self._setting.get("syntaxes"):
             ft = FileType.from_string(syntax)

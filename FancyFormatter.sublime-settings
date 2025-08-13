@@ -3,8 +3,8 @@
 
     //windows: winget install --id=LLVM.ClangFormat -e 
     "clang_format.exe_path":"",    
-    // syntaxes: "cs", "java", "ts", "m", "mm", "c", "cpp","proto"
-    "clang_format.syntaxes": ["cs", "java", "ts", "m", "mm", "c", "cpp"],
+    // support: "cs", "java", "ts", "m", "mm", "c", "cpp","proto","json"
+    "clang_format.syntaxes": ["cs", "java", "ts", "m", "mm", "c", "cpp","proto"],
     // inner style: LLVM, Google, Chromium, Mozilla, WebKit, Microsoft, GNU
     // or you can define the file:path
     "clang_format.style": "Microsoft",
@@ -21,48 +21,56 @@
 
     "gofmt.syntaxes":["go"],
 
-
-    "javascript.syntaxes": ["js", "json"], 
-    "javascript.indent_size": 4, 
-    "javascript.indent_char": " ",
-    "javascript.indent_with_tabs": true, 
-    "javascript.eol": "\n", 
-    "javascript.preserve_newlines": false, 
-    "javascript.max_preserve_newlines": 10, 
-    "javascript.space_in_paren": false,
-    "javascript.space_in_empty_paren": false, 
-    "javascript.e4x": false,  
-    "javascript.jslint_happy": false,
-    "javascript.space_after_anon_function": false,
-    "javascript.brace_style": "collapse", 
-    "javascript.keep_array_indentation": false, 
-    "javascript.keep_function_indentation": false, 
-    "javascript.eval_code": false, 
-    "javascript.unescape_strings": false,
-    "javascript.wrap_line_length": 0, 
-    "javascript.unindent_chained_methods": false,
-    "javascript.break_chained_methods": false, 
-    "javascript.end_with_newline": false, 
-    "javascript.comma_first": false, 
+    //https://pypi.org/project/jsbeautifier/
+    //https://beautifier.io/
+    //support: js, json
+    "jsbeautifier.syntaxes": ["js","json"], 
+    "jsbeautifier.indent_size": 4, 
+    "jsbeautifier.indent_char": " ",
+    "jsbeautifier.indent_with_tabs": true, 
+    "jsbeautifier.eol": "\n", 
+    "jsbeautifier.preserve_newlines": false, 
+    "jsbeautifier.max_preserve_newlines": 10, 
+    "jsbeautifier.space_in_paren": false,
+    "jsbeautifier.space_in_empty_paren": false, 
+    "jsbeautifier.e4x": false,  
+    "jsbeautifier.jslint_happy": false,
+    "jsbeautifier.space_after_anon_function": false,
+    "jsbeautifier.brace_style": "collapse",   // "collapse" | "expand" | "end-expand".
+    "jsbeautifier.keep_array_indentation": false, 
+    "jsbeautifier.keep_function_indentation": false, 
+    "jsbeautifier.eval_code": false, 
+    "jsbeautifier.unescape_strings": false,
+    "jsbeautifier.wrap_line_length": 40, 
+    "jsbeautifier.unindent_chained_methods": false,
+    "jsbeautifier.break_chained_methods": false, 
+    "jsbeautifier.end_with_newline": false, 
+    "jsbeautifier.comma_first": false, 
     // Operator position: before-newline, after-newline, preserve-newline
-    "javascript.operator_position": "before-newline", 
+    "jsbeautifier.operator_position": "before-newline", 
  
-    //"html","blade","asp","xml"
-    "html.syntaxes": ["html","asp","xml"], // Syntax names which must process HTML formatter
-    "html.indent_size": 4,
+    //"html","asp","xml"
+    "html.syntaxes": [""], // Syntax names which must process HTML formatter    
+    "html.indent_size": 4, 
+    "html.indent_char": " ", 
+    "html.indent_with_tabs": false,
+    "html.exception_on_tag_mismatch": false, 
+    "html.expand_javascript": false,
+    "html.expand_tags": false, 
+    "html.minimum_attribute_count": 2,
+    "html.first_attribute_on_new_line": false, 
+    "html.reduce_empty_tags": false, 
+    "html.reduce_whole_word_tags": false, 
+    "html.custom_singletons": "", // Custom singleton tags for various template languages outside of the HTML5 spec
 
-    "html.use_beautiful_soup": true,
-    "html.beautiful_soup.indent_size": 4, 
-    "html.beautiful_soup.indent_char": " ", 
-    "html.beautiful_soup.indent_with_tabs": false,
-    "html.beautiful_soup.exception_on_tag_mismatch": false, 
-    "html.beautiful_soup.expand_javascript": false,
-    "html.beautiful_soup.expand_tags": false, 
-    "html.beautiful_soup.minimum_attribute_count": 2,
-    "html.beautiful_soup.first_attribute_on_new_line": false, 
-    "html.beautiful_soup.reduce_empty_tags": false, 
-    "html.beautiful_soup.reduce_whole_word_tags": false, 
-    "html.beautiful_soup.custom_singletons": "", // Custom singleton tags for various template languages outside of the HTML5 spec
+    //"html","asp","xml"
+    "beautiful_soup.syntaxes":["html","xml"],
+    "beautiful_soup.indent_size": 4,
+    
+
+    //pip install black
+    //support: py
+    "python_black.syntaxes": ["py"],
 
 
     "css.syntaxes": ["css","less"],
@@ -85,12 +93,9 @@
     "scss.newline_between_rules": false,
     "scss.space_around_combinator": false,
     "scss.eol": "\n", 
-    
 
-    //pip install black
-    "python_black.syntaxes": ["py"],
-    
-    
+
+    //support: php
     "php_cs_fixer.syntaxes": ["php"],
     "php_cs_fixer.php_path": "",
     

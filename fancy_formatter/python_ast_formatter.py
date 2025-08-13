@@ -12,8 +12,7 @@ class PythonAstFormatter(ISettingReader):
         self._debug = debug
 
     def get_support_file_type(self)->List[FileType]:
-        support_list= [
-            FileType.PY]
+        support_list= [FileType.PY]
         ret=[]
         for syntax in self._setting.get("syntaxes"):
             ft = FileType.from_string(syntax)

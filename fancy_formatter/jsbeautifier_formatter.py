@@ -6,15 +6,16 @@
 from .lib.jsbeautifier import *
 from .base    import * 
 
-class JavascriptFormatter(IBaseFormatter):
+# https://pypi.org/project/jsbeautifier/
+class JsBeautifierFormatter(IBaseFormatter):
 
     def __init__(self, setting:ISettingReader, debug : bool ):
         self._setting = setting
         self._debug = debug
 
     def get_support_file_type(self)->List[FileType]:
-        support_list= [            
-            FileType.JS,FileType.JSON]
+        support_list= [FileType.JS,FileType.JSON]
+        
         ret=[]
         for syntax in self._setting.get("syntaxes"):
             ft = FileType.from_string(syntax)
@@ -47,6 +48,12 @@ class JavascriptFormatter(IBaseFormatter):
             'space_after_anon_function',
             'unindent_chained_methods',
             'operator_position'
+        ]
+
+        keys=[
+            'indent_size',        
+            'wrap_line_length',
+            'end_with_newline',
         ]
         for key in keys:
             setattr(options, key, self._setting.get(key))

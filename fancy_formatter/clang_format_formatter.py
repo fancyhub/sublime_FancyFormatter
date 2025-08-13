@@ -45,34 +45,12 @@ class ClangFormatFormatter(IBaseFormatter):
         cmd.append(exe_path)
 
         style = self._setting.get(f"style_{file_type.get_suffix()}",'style')
+        cmd.append(f"-assume-filename=file.{file_type.get_suffix()}")
         cmd.append(f"-style={style}")
-
-
-        with tempfile.NamedTemporaryFile(mode='w', suffix=f".{file_type.get_suffix()}", delete=False) as temp_file:
-            temp_file.write(text)
-            temp_file_name = temp_file.name
-        
-        cmd.append(temp_file_name)
-
+        cmd.append("-")
         if self._debug:
             print(" ".join(cmd))
-
-        try:            
-            startupinfo = self._get_hidden_startupinfo()
-            result = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                check=True,
-                startupinfo=startupinfo
-                )             
-            os.unlink(temp_file_name)
-                                                    
-            return FormatResult.from_subprocess_result(result)
-        except subprocess.CalledProcessError as e:
-            return FormatResult.from_subprocess_exception(e)
-        except Exception as e:
-            return FormatResult.from_exception(e) 
+        return execute_with_pipe(cmd,text) 
 
     def _get_hidden_startupinfo(self):
         if sys.platform.startswith('win32'):
