@@ -1,0 +1,1 @@
+git archive --format=zip --output=FancyFormatter.sublime-package HEAD
