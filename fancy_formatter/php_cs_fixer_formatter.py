@@ -15,16 +15,16 @@ class PhpCsFixerFormatter(IBaseFormatter):
         self._setting = setting
         self._debug = debug
 
-    def get_support_file_type(self)->List[FileType]:
-        support_list= [FileType.PHP]
+    def get_support_file_type(self)->List[EFileType]:
+        support_list= [EFileType.PHP]
         ret=[]
         for syntax in self._setting.get("syntaxes"):
-            ft = FileType.from_string(syntax)
+            ft = EFileType.from_string(syntax)
             if ft in support_list:
                 ret.append(ft)
         return ret
 
-    def format_text(self, file_type:FileType, text:str) -> FormatResult:
+    def format_text(self, file_type:EFileType, text:str) -> FormatResult:
         php_path = 'php'
         if self._setting.get("php_path"):
             php_path = self._setting.get("php_path")

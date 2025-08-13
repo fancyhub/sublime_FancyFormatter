@@ -12,16 +12,16 @@ class PythonBlackFormatter(IBaseFormatter):
         self._setting = setting
         self._debug = debug
 
-    def get_support_file_type(self)->List[FileType]:
-        support_list= [FileType.PY]
+    def get_support_file_type(self)->List[EFileType]:
+        support_list= [EFileType.PY]
         ret=[]
         for syntax in self._setting.get("syntaxes"):
-            ft = FileType.from_string(syntax)
+            ft = EFileType.from_string(syntax)
             if ft in support_list:
                 ret.append(ft)
         return ret
 
-    def format_text(self, file_type:FileType, text:str) -> FormatResult:
+    def format_text(self, file_type:EFileType, text:str) -> FormatResult:
         cmd=[]
         
         exe_path = self._setting.get("exe_path")

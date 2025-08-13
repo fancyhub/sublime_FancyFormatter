@@ -1,6 +1,6 @@
 {
 	"name": "FancyFormatter",
-	"version": "4.0.2",
+	"version": "4.0.3",
 	"sublime_text": ">=4000",
 	"platforms": ["*"],
 	"python_version": "3.8",
@@ -10,5 +10,5 @@
 	"description": "Formatter tool for sublime text 4",
 	"labels": [],
 	"libraries": [],	
-	"release_time": "2025-08-13",
+	"release_time": "2025-08-13 08:00:00"
 }

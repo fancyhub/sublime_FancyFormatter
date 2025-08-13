@@ -17,6 +17,7 @@ from .php_cs_fixer_formatter import PhpCsFixerFormatter
 from .beautiful_soup_formatter import BeautifulSoupFormatter
 from .css_formatter import CssFormatter
 from .scss_formatter import ScssFormatter
+from .prettier_formatter import PrettierFormatter
 
 map_settings_formatter = [
             ('clang_format', ClangFormatFormatter),
@@ -28,13 +29,14 @@ map_settings_formatter = [
             ("css",CssFormatter),
             ("scss",ScssFormatter),
             ("beautiful_soup",BeautifulSoupFormatter),
+            ("prettier",PrettierFormatter)
         ]
 
 
 class FancyFormatter:
     def __init__(self, setting:ISettingReader):
         self._setting = setting
-        self._classmap:Dict[FileType, ISettingReader] = {}
+        self._classmap:Dict[EFileType, ISettingReader] = {}
 
         self._debug = setting.get("debug")
         # map of settings names with related class
@@ -49,7 +51,7 @@ class FancyFormatter:
                 print(f"FileType: {key.name.lower()}  \t-> {value.__class__.__name__}")
            
 
-    def format_text(self, file_type:FileType, text:str) -> FormatResult:        
+    def format_text(self, file_type:EFileType, text:str) -> FormatResult:        
         if file_type not in self._classmap :
             return FormatResult.fatal_error(f"{file_type.name} is not support")
         
@@ -57,9 +59,11 @@ class FancyFormatter:
         try:
             return formatter.format_text(file_type,text)
         except TypeError as e:
+            traceback.print_exc()
             return FormatResult.from_exception(e)
         except Exception as e:
+            traceback.print_exc()
             return FormatResult.from_exception(e)
 
-    def exists(self, file_type:FileType)->bool:
+    def exists(self, file_type:EFileType)->bool:
         return file_type in self._classmap 

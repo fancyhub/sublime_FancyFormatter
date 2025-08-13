@@ -17,22 +17,22 @@ class ClangFormatFormatter(IBaseFormatter):
         self._setting = setting
         self._debug = debug
 
-    def get_support_file_type(self)->List[FileType]:
+    def get_support_file_type(self)->List[EFileType]:
         support_list= [
-            FileType.C,FileType.CPP,
-            FileType.CS,
-            FileType.JAVA,
-            FileType.JS,FileType.TS,FileType.JSON,
-            FileType.M,FileType.MM,
-            FileType.PROTO]
+            EFileType.C,EFileType.CPP,
+            EFileType.CS,
+            EFileType.JAVA,
+            EFileType.JS,EFileType.TS,EFileType.JSON,
+            EFileType.M,EFileType.MM,
+            EFileType.PROTO]
         ret=[]
         for syntax in self._setting.get("syntaxes"):
-            ft = FileType.from_string(syntax)
+            ft = EFileType.from_string(syntax)
             if ft in support_list:
                 ret.append(ft)
         return ret
 
-    def format_text(self, file_type:FileType, text:str) -> FormatResult:
+    def format_text(self, file_type:EFileType, text:str) -> FormatResult:
         
         cmd=[]
         

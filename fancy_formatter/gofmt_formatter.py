@@ -10,15 +10,15 @@ class GofmtFormatter:
         self._setting = setting
         self._debug = debug
 
-    def get_support_file_type(self)->List[FileType]:
-        support_list= [FileType.GO]
+    def get_support_file_type(self)->List[EFileType]:
+        support_list= [EFileType.GO]
         ret=[]
         for syntax in self._setting.get("syntaxes"):
-            ft = FileType.from_string(syntax)
+            ft = EFileType.from_string(syntax)
             if ft in support_list:
                 ret.append(ft)
         return ret
 
-    def format_text(self, file_type:FileType, text:str) -> Tuple[str,str]:
+    def format_text(self, file_type:EFileType, text:str) -> Tuple[str,str]:
         return execute_with_pipe(['gofmt'], text)
         

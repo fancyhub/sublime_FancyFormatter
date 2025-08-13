@@ -55,6 +55,10 @@ if __name__ == "__main__":
 
     data = load_json_file("FancyFormatter.sublime-settings")
     reader = JsonSettingReader(data)
+    keys=reader.get_keys()
+    sub_reader = reader.create_sub("html")
+    sub_keys = sub_reader.get_keys()
+
     formatter = FancyFormatter(reader)
 
     content= read_file_to_string(r"C:\Users\cunyu.fan\Desktop\sublimetext-codeformatter-master\tests\data\css\test.css")
@@ -67,5 +71,5 @@ if __name__ == "__main__":
 
     print( greet("World") )
     """
-    result= formatter.format_text(FileType.HTML, content)
+    result= formatter.format_text(EFileType.HTML, content)
     result.print()

@@ -13,17 +13,17 @@ class CssFormatter:
         self._setting = setting
         self._debug = debug
 
-    def get_support_file_type(self)->List[FileType]:
-        support_list= [FileType.CSS,FileType.LESS]
+    def get_support_file_type(self)->List[EFileType]:
+        support_list= [EFileType.CSS,EFileType.LESS]
         ret=[]
         for syntax in self._setting.get("syntaxes"):
-            ft = FileType.from_string(syntax)
+            ft = EFileType.from_string(syntax)
             if ft in support_list:
                 ret.append(ft)
         return ret
  
 
-    def format_text(self, file_type:FileType, text:str) -> FormatResult:
+    def format_text(self, file_type:EFileType, text:str) -> FormatResult:
         stderr = ''
         stdout = ''
 

@@ -6,11 +6,12 @@ from enum import Enum, auto, unique
 from typing import List,Tuple
 import subprocess
 import os
+import traceback
 import sys
 import re
 
 @unique
-class FileType(Enum):
+class EFileType(Enum):
     NONE = 0    
     C = auto()
     CPP = auto()
@@ -32,20 +33,22 @@ class FileType(Enum):
     JAVA=auto()
     M=auto()
     MM=auto()
+    MD=auto()
+    YAML=auto()
     MAX = auto()
 
 
     @classmethod
-    def from_string(cls, s: str):
+    def from_string(cls:'FormatResult', s: str):
         s_upper = s.upper()
         for member in cls.__members__:
             if member == s_upper:
                 return cls[member]
         print(f"Invalid FileType: {s} ")
-        return FileType.NONE    
+        return EFileType.NONE    
 
     def get_suffix(self)->str:
-        if self.value <= FileType.NONE.value or self.value >= FileType.MAX.value:
+        if self.value <= EFileType.NONE.value or self.value >= EFileType.MAX.value:
             return ""
         else:
             return self.name.lower()
@@ -74,35 +77,38 @@ class FormatResult:
             print(f"FancyFormatter Fatal: \n {self.ErrorMsg}")
 
     @classmethod
-    def normal_error(cls:str,msg:str)->'FormatResult':
+    def normal_error(cls:'FormatResult',msg:str)->'FormatResult':
         return FormatResult(stderr=msg)
     
     @classmethod
-    def fatal_error(cls:str,msg:str)->'FormatResult':
+    def fatal_error(cls:'FormatResult',msg:str)->'FormatResult':
         result = FormatResult()
         result.Code = EFormatResult.Fatal
         result.ErrorMsg = msg
         return result
 
     @classmethod
-    def from_subprocess_exception(cls:str,e:subprocess.CalledProcessError)->'FormatResult':
+    def from_subprocess_exception(cls:'FormatResult',e:subprocess.CalledProcessError)->'FormatResult':
         result = FormatResult()
         result.Code = EFormatResult.Fatal
         stderr = e.stderr    
         if hasattr(stderr, 'decode'):
             stderr= stderr.decode('UTF-8', 'ignore')
         result.ErrorMsg = stderr
+
+        traceback.print_exc()
         return result
 
     @classmethod
-    def from_exception(cls:str,e:Exception)->'FormatResult':
+    def from_exception(cls:'FormatResult',e:Exception)->'FormatResult':
         result = FormatResult()
         result.Code = EFormatResult.Fatal
         result.ErrorMsg = f"{e.__class__.__name__}:{str(e)}"
+        traceback.print_exc()
         return result
 
     @classmethod
-    def from_subprocess_result(cls:str,p:subprocess.CompletedProcess)->'FormatResult':  
+    def from_subprocess_result(cls:'FormatResult',p:subprocess.CompletedProcess)->'FormatResult':  
         stdout = p.stdout
         if hasattr(stdout, 'decode'):
             stdout= stdout.decode('UTF-8', 'ignore')
@@ -136,15 +142,25 @@ def execute_with_pipe(args:List[str], text:str)->FormatResult:
     except Exception as e:
         return FormatResult.from_exception(e)        
     
+# helloWorldHelloWorld -> hello-world-hello-world
+def camel_to_kebab(s):
+    result = []
+    for char in s:
+        if char.isupper():
+            result.append('-')
+            result.append(char.lower())
+        else:
+            result.append(char)
+    return ''.join(result)
 
 class IBaseFormatter:
-    def get_support_file_type(self)->List[FileType]:
+    def get_support_file_type(self)->List[EFileType]:
         pass 
 
-    def format_text(self, file_type:FileType,text:str) -> FormatResult:
+    def format_text(self, file_type:EFileType,text:str) -> FormatResult:
         return "","error: not implemented"
 
-    def format_file(self,file_type:FileType,file_path:str)->str:
+    def format_file(self,file_type:EFileType,file_path:str)->str:
         return "error: not implemented"
 
     
@@ -155,6 +171,10 @@ class ISettingReader:
         
     def get(self, key:str, fall_back_key:str=None, defaultVal=""):
         pass 
+
+    def get_keys(self)->List[str]:
+        return []
+
 
 class SubSettingReader(ISettingReader):
     def __init__(self, orig:ISettingReader,prefix:str):
@@ -171,6 +191,17 @@ class SubSettingReader(ISettingReader):
         if fall_back_key:
             real_fall_back_key = f"{self._prefix}.{fall_back_key}"
         return self._orig.get(real_key, real_fall_back_key)
+    
+    def get_keys(self)->List[str]:
+        orig_keys=self._orig.get_keys()
+        ret :List[str] =[]
+        key_prefix = self._prefix+"."
+        key_prefix_len = len(key_prefix)
+        for key in orig_keys:
+            if key.startswith(key_prefix):
+                ret.append(key[key_prefix_len:])
+        return ret
+
 
 
 class JsonSettingReader(ISettingReader):
@@ -203,3 +234,5 @@ class JsonSettingReader(ISettingReader):
             return self._json_data[fall_back_key]
         return defaultVal
     
+    def get_keys(self)->List[str]:
+        return self._json_data.keys()

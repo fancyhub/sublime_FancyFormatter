@@ -21,11 +21,40 @@
 
     "gofmt.syntaxes":["go"],
 
+    // https://prettier.io/
+    // https://prettier.io/docs/install
+    // support: "js","ts","json","css","less","scss","md","yaml","html"
+    "prettier.syntaxes":[],
+
+    //options is copy from https://prettier.io/playground/
+    "prettier.option.arrowParens": "always",
+    "prettier.option.bracketSameLine": false,
+    "prettier.option.objectWrap": "preserve",
+    "prettier.option.bracketSpacing": true,
+    "prettier.option.semi": true,
+    "prettier.option.experimentalOperatorPosition": "end",
+    "prettier.option.experimentalTernaries": false,
+    "prettier.option.singleQuote": false,
+    "prettier.option.jsxSingleQuote": false,
+    "prettier.option.quoteProps": "as-needed",
+    "prettier.option.trailingComma": "all",
+    "prettier.option.singleAttributePerLine": false,
+    "prettier.option.htmlWhitespaceSensitivity": "css",
+    "prettier.option.vueIndentScriptAndStyle": false,
+    "prettier.option.proseWrap": "preserve",
+    "prettier.option.insertPragma": false,
+    "prettier.option.printWidth": 80,
+    "prettier.option.requirePragma": false,
+    "prettier.option.tabWidth": 4,
+    "prettier.option.useTabs": true,
+    "prettier.option.embeddedLanguageFormatting": "auto",
+
     //https://pypi.org/project/jsbeautifier/
+    //support: "js", "json"
+    "jsbeautifier.syntaxes": ["js", "json"],
+    
     //https://beautifier.io/
-    //support: js, json
-    "jsbeautifier.syntaxes": ["js","json"], 
-    "jsbeautifier.indent_size": 4, 
+    "jsbeautifier.indent_size": 4,
     "jsbeautifier.indent_char": " ",
     "jsbeautifier.indent_with_tabs": true, 
     "jsbeautifier.eol": "\n", 
@@ -71,7 +100,7 @@
     //support: py
     "python_black.syntaxes": ["py"],
 
-
+    //support: "css","less"
     "css.syntaxes": ["css","less"],
     "css.indent_size": 4, 
     "css.indent_char": " ", 
@@ -82,7 +111,7 @@
     "css.space_around_combinator": false,
     "css.eol": "\n", 
 
-
+    //support: "scss","sass"
     "scss.syntaxes": ["scss","sass"], 
     "scss.indent_size": 4, 
     "scss.indent_char": " ",
