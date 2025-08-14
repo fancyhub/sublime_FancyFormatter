@@ -12,16 +12,11 @@ class JsBeautifierFormatter(IBaseFormatter):
     def __init__(self, setting:ISettingReader, debug : bool ):
         self._setting = setting
         self._debug = debug
+        self._support_file_type_list :List[EFileType]= [EFileType.JS,EFileType.JSON]
 
-    def get_support_file_type(self)->List[EFileType]:
-        support_list= [EFileType.JS,EFileType.JSON]
-        
-        ret=[]
-        for syntax in self._setting.get("syntaxes"):
-            ft = EFileType.from_string(syntax)
-            if ft in support_list:
-                ret.append(ft)
-        return ret
+    def get_support_file_type(self)->List[EFileType]:        
+        return self._support_file_type_list 
+ 
 
     def format_text(self, file_type:EFileType, text:str) -> FormatResult:        
         options = default_options()

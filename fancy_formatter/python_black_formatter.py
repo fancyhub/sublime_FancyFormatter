@@ -11,16 +11,11 @@ class PythonBlackFormatter(IBaseFormatter):
     def __init__(self, setting:ISettingReader, debug : bool ):
         self._setting = setting
         self._debug = debug
+        self._support_file_type_list :List[EFileType]= [EFileType.PY]
 
-    def get_support_file_type(self)->List[EFileType]:
-        support_list= [EFileType.PY]
-        ret=[]
-        for syntax in self._setting.get("syntaxes"):
-            ft = EFileType.from_string(syntax)
-            if ft in support_list:
-                ret.append(ft)
-        return ret
-
+    def get_support_file_type(self)->List[EFileType]:        
+        return self._support_file_type_list
+ 
     def format_text(self, file_type:EFileType, text:str) -> FormatResult:
         cmd=[]
         
@@ -29,7 +24,7 @@ class PythonBlackFormatter(IBaseFormatter):
             if not os.path.exists(exe_path) or not os.path.isfile(exe_path):
                 return FormatResult.fatal_error(f"Can't find black: {exe_path}")
         else:
-            exe_path = "black"        
+            exe_path = "black"
         cmd.append(exe_path)
 
         cmd.append("--quiet")

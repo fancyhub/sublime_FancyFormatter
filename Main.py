@@ -75,9 +75,8 @@ def _get_syntax(view)->str:
     return found.lower()
  
 def _show_error_dialog(text):
-    msg=u'FancyFormatter\n\n%s' % text
-    sublime.error_message(msg)
-    print(msg)
+    sublime.error_message(f"FancyFormatter\n{text}")
+    # print(f"FancyFormatter: {text}")
  
 class FancyFormatterCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -103,6 +102,6 @@ class FancyFormatterCommand(sublime_plugin.TextCommand):
             view.replace(edit, file_text, result.Result)
             print("FancyFormatter: format succ")
         elif result.Code == EFormatResult.Fatal:
-            _show_error_dialog('Format Error\n' + result.ErrorMsg)
+            _show_error_dialog(result.ErrorMsg)
         else:
-            print(u'FancyFormatter\n\n%s' % result.ErrorMsg)
+            print(f"FancyFormatter: {result.ErrorMsg}")

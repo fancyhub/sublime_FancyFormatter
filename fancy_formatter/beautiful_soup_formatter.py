@@ -22,18 +22,12 @@ class BeautifulSoupFormatter(IBaseFormatter):
     def __init__(self, setting:ISettingReader, debug : bool ):
         self._setting = setting
         self._debug = debug
+        self._support_file_type_list :List[EFileType]= [EFileType.HTML,EFileType.ASP,EFileType.XML]
 
     def get_support_file_type(self)->List[EFileType]:
         if not use_bs4:
             return []
-        
-        support_list= [EFileType.HTML,EFileType.ASP,EFileType.XML]
-        ret=[]
-        for syntax in self._setting.get("syntaxes"):
-            ft = EFileType.from_string(syntax)
-            if ft in support_list:
-                ret.append(ft)
-        return ret    
+        return self._support_file_type_list
 
     def format_text(self, file_type:EFileType, text:str) -> FormatResult:
         p_indent_size = self._setting.get("indent_size")

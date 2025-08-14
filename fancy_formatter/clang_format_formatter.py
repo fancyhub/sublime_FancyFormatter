@@ -16,21 +16,16 @@ class ClangFormatFormatter(IBaseFormatter):
     def __init__(self, setting:ISettingReader, debug : bool ):
         self._setting = setting
         self._debug = debug
-
-    def get_support_file_type(self)->List[EFileType]:
-        support_list= [
+        self._support_file_type_list :List[EFileType]= [
             EFileType.C,EFileType.CPP,
             EFileType.CS,
             EFileType.JAVA,
             EFileType.JS,EFileType.TS,EFileType.JSON,
             EFileType.M,EFileType.MM,
             EFileType.PROTO]
-        ret=[]
-        for syntax in self._setting.get("syntaxes"):
-            ft = EFileType.from_string(syntax)
-            if ft in support_list:
-                ret.append(ft)
-        return ret
+
+    def get_support_file_type(self)->List[EFileType]:        
+        return self._support_file_type_list     
 
     def format_text(self, file_type:EFileType, text:str) -> FormatResult:
         
@@ -41,7 +36,7 @@ class ClangFormatFormatter(IBaseFormatter):
             if not os.path.exists(exe_path) or not os.path.isfile(exe_path):
                 return FormatResult.fatal_error(f"Can't find clang_format.exe.path: {exe_path}")
         else:
-            exe_path = "clang-format"        
+            exe_path = "clang-format"
         cmd.append(exe_path)
 
         style = self._setting.get(f"style_{file_type.get_suffix()}",'style')

@@ -20,7 +20,7 @@ class PrettierFormatter:
 
             EFileType.TS: "typescript",
             EFileType.JS: "javascript",
-            EFileType.JSON: "json5",
+            EFileType.JSON: "jsonc",
 
             EFileType.MD:"markdown",
 
@@ -30,28 +30,31 @@ class PrettierFormatter:
 
             EFileType.YAML:"yaml",
         }
-
-    def get_support_file_type(self)->List[EFileType]:
-        support_list= [
+        self._support_file_type_list :List[EFileType]= [
             EFileType.HTML,
             EFileType.TS,EFileType.JS,EFileType.JSON,
             EFileType.MD,
             EFileType.CSS,EFileType.LESS,EFileType.SCSS,
             EFileType.YAML]
-        ret=[]
-        for syntax in self._setting.get("syntaxes"):
-            ft = EFileType.from_string(syntax)
-            if ft in support_list:
-                ret.append(ft)
-        return ret
+
+    def get_support_file_type(self)->List[EFileType]:        
+        return self._support_file_type_list
 
     def format_text(self, file_type:EFileType, text:str) -> Tuple[str,str]:
 
         cmd=[]
-        if os.name == 'nt':
-            cmd.append("prettier.cmd")
+        exe_path = self._setting.get("exe_path")
+        if exe_path:
+            if not os.path.exists(exe_path) or not os.path.isfile(exe_path):
+                return FormatResult.fatal_error(f"Can't find prettier exe path: {exe_path}")
         else:
-            cmd.append("prettier")
+            if os.name == 'nt':
+                exe_path="prettier.cmd"
+            else:
+                exe_path="prettier"
+
+        
+        cmd.append(exe_path)
         cmd.append("--parser")
         cmd.append(self._parser_map[file_type])
 

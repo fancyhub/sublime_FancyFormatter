@@ -138,7 +138,12 @@ def execute_with_pipe(args:List[str], text:str)->FormatResult:
         )
         return FormatResult.from_subprocess_result(p)
     except subprocess.CalledProcessError as e:
-        return FormatResult.from_subprocess_exception(e)        
+        return FormatResult.from_subprocess_exception(e)
+    except FileNotFoundError as e:
+        if e.filename:
+            return FormatResult.fatal_error(f"{e.strerror} : {e.filename} {e.filename2}")
+        else:
+            return FormatResult.fatal_error(f"{e.strerror} : {args[0]} ?")
     except Exception as e:
         return FormatResult.from_exception(e)        
     
