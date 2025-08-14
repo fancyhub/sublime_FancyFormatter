@@ -4,7 +4,7 @@
     "file_type.json": "jsbeautifier",   //clang_format,prettier,jsbeautifier
     "file_type.proto": "clang_format",  //clang_format
     "file_type.html": "prettier",  //prettier,beautiful_soup
-    "file_type.html": "prettier",       //prettier,beautiful_soup
+    "file_type.xml": "prettier",       //prettier,beautiful_soup
     "file_type.css": "css",             //prettier,css
     "file_type.less": "css",            //prettier,css
     "file_type.scss": "scss",           //prettier,scss
