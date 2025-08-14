@@ -1,6 +1,6 @@
 {
 	"name": "FancyFormatter",
-	"version": "4.0.4",
+	"version": "4.0.5",
 	"sublime_text": ">=4000",
 	"platforms": ["*"],
 	"python_version": "3.8",
