@@ -39,29 +39,20 @@ if __name__ == "__main__":
     formatter = FancyFormatter(reader)
 
     test_dict:Dict[EFileType,str]={
-        EFileType.CSS:"xxx.css",
-        EFileType.HTML:"xxx.html",
-        EFileType.JS:"xxx.js",
-        EFileType.TS:"xxx.ts",
-        EFileType.JSON:"xxx.json",
-        EFileType.MD:"xxx.md",
-        EFileType.YAML:"xxx.yaml",
-        EFileType.LESS:"xxx.less",
-        EFileType.SCSS:"xxx.scss",  
+        # EFileType.CSS:"xxx.css",
+        # EFileType.HTML:"xxx.html",
+        # EFileType.JS:"xxx.js",
+        # EFileType.TS:"xxx.ts",
+        # EFileType.JSON:"xxx.json",
+        # EFileType.MD:"xxx.md",
+        # EFileType.YAML:"xxx.yaml",
+        # EFileType.LESS:"xxx.less",
+        # EFileType.SCSS:"xxx.scss",  
+        EFileType.PY:__file__,
     }
 
     for t,path in test_dict:
-        
-
-    content= read_file_to_string(r"C:\Users\cunyu.fan\Desktop\sublimetext-codeformatter-master\tests\data\css\test.css")
-    content = read_file_to_string(__file__)
-    content = read_file_to_string("Main.py")
-    content = read_file_to_string(r"C:\Users\cunyu.fan\Downloads\FileReaderTest.php")
-    unformatted_code = """
-    def greet(name):
-        return "Hello, " +name
-
-    print( greet("World") )
-    """
-    result= formatter.format_text(EFileType.CPP, content)
-    result.print()
+        content = read_file_to_string(path)
+        result= formatter.format_text(t, content)
+        print(f"Format: {t}")
+        result.print()
