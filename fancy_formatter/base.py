@@ -21,7 +21,6 @@ class EFileType(Enum):
     TS = auto()
     HTML=auto()
     XML=auto()
-    ASP=auto()
     PY =auto()
     CSS = auto()
     LESS =auto()
@@ -74,11 +73,12 @@ class FormatResult:
 
     def print(self):
         if self.Code == EFormatResult.OK:
+            print(f"FancyFormatter Format SUCC:")
             print(self.Result)
         elif self.Code == EFormatResult.ERROR:
-            print(f"FancyFormatter Error:\n {self.ErrorMsg}")
+            print(f"FancyFormatter Error: {self.ErrorMsg}")
         elif self.Code==  EFormatResult.Fatal:
-            print(f"FancyFormatter Fatal: \n {self.ErrorMsg}")
+            print(f"FancyFormatter Fatal:  {self.ErrorMsg}")
 
     @classmethod
     def normal_error(cls:'FormatResult',msg:str)->'FormatResult':

@@ -48,7 +48,7 @@ if __name__ == "__main__":
         # EFileType.YAML:"xxx.yaml",
         # EFileType.LESS:"xxx.less",
         # EFileType.SCSS:"xxx.scss",  
-        EFileType.PY:__file__,
+        # EFileType.PY:__file__,
     }
 
     for t,path in test_dict:
@@ -56,3 +56,14 @@ if __name__ == "__main__":
         result= formatter.format_text(t, content)
         print(f"Format: {t}")
         result.print()
+
+    for t in EFileType.__members__:
+        file_type =EFileType.from_string(t)
+        if file_type == EFileType.NONE or file_type==EFileType.MAX:
+            continue
+
+        print(f"----------------- Format: {file_type} -----------------")
+        result= formatter.format_text(file_type, " ")
+        result.print()
+        print("\n\n")
+

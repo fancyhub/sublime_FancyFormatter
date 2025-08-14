@@ -20,38 +20,9 @@ class JsBeautifierFormatter(IBaseFormatter):
 
     def format_text(self, file_type:EFileType, text:str) -> FormatResult:        
         options = default_options()
-        keys=[
-            'indent_size',
-            'indent_char',
-            'indent_with_tabs',
-            'eol',
-            'preserve_newlines',
-            'max_preserve_newlines',
-            'space_in_paren',
-            'space_in_empty_paren',
-            'e4x',
-            'jslint_happy',
-            'brace_style',
-            'keep_array_indentation',
-            'keep_function_indentation',
-            'eval_code',
-            'unescape_strings',
-            'wrap_line_length',
-            'break_chained_methods',
-            'end_with_newline',
-            'comma_first',
-            'space_after_anon_function',
-            'unindent_chained_methods',
-            'operator_position'
-        ]
-
-        keys=[
-            'indent_size',        
-            'wrap_line_length',
-            'end_with_newline',
-        ]
-        for key in keys:
-            setattr(options, key, self._setting.get(key))
+        option_reader = self._setting.create_sub("option")
+        for key in option_reader.get_keys():
+            setattr(options, key, option_reader.get(key))
          
         try:
             return FormatResult(beautify(text, options))

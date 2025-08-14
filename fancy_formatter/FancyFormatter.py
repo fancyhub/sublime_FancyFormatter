@@ -15,8 +15,8 @@ from .python_black_formatter import PythonBlackFormatter
 from .php_cs_fixer_formatter import PhpCsFixerFormatter
 from .phpfmt_formatter import PhpfmtFormatter
 from .beautiful_soup_formatter import BeautifulSoupFormatter
-from .css_formatter import CssFormatter
-from .scss_formatter import ScssFormatter
+from .cssbeautifier_formatter import CssbeautifierFormatter
+from .scssbeautifier_formatter import ScssbeautifierFormatter
 from .prettier_formatter import PrettierFormatter
 
 map_settings_formatter = {
@@ -25,8 +25,8 @@ map_settings_formatter = {
             'jsbeautifier': JsBeautifierFormatter,
             "python_black":PythonBlackFormatter,
             "php_cs_fixer":PhpCsFixerFormatter,
-            "css":CssFormatter,
-            "scss":ScssFormatter,
+            "cssbeautifier":CssbeautifierFormatter,
+            "scssbeautifier":ScssbeautifierFormatter,
             "beautiful_soup":BeautifulSoupFormatter,
             "prettier":PrettierFormatter,
             "phpfmt":PhpfmtFormatter,

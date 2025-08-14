@@ -3,12 +3,12 @@
     
     "file_type.json": "jsbeautifier",   //clang_format,prettier,jsbeautifier
     "file_type.proto": "clang_format",  //clang_format
-    "file_type.html": "prettier",  //prettier,beautiful_soup
+    "file_type.html": "prettier",       //prettier,beautiful_soup
     "file_type.xml": "prettier",       //prettier,beautiful_soup
-    "file_type.css": "css",             //prettier,css
-    "file_type.less": "css",            //prettier,css
-    "file_type.scss": "scss",           //prettier,scss
-    "file_type.sass": "scss",           //prettier,scss
+    "file_type.css": "cssbeautifier",             //prettier,cssbeautifier
+    "file_type.less": "cssbeautifier",          //prettier,cssbeautifier
+    "file_type.scss": "scssbeautifier",           //prettier,scssbeautifier
+    "file_type.sass": "scssbeautifier",           //prettier,scssbeautifier
     "file_type.md": "prettier",         //prettier
     "file_type.yaml": "prettier",       //prettier
 
@@ -41,8 +41,9 @@
     "clang_format.style_cpp":"",
     "clang_format.style_proto":"",
  
-
+    // 
     "gofmt.file_types":["go"],
+    "gofmt.exe_path":"", 
 
     // https://prettier.io/
     // https://prettier.io/docs/install
@@ -74,32 +75,32 @@
     //https://pypi.org/project/jsbeautifier/
     "jsbeautifier.file_types": ["js", "json"],    
     //https://beautifier.io/
-    "jsbeautifier.indent_size": 4,
-    "jsbeautifier.indent_char": " ",
-    "jsbeautifier.indent_with_tabs": true, 
-    "jsbeautifier.eol": "\n", 
-    "jsbeautifier.preserve_newlines": false, 
-    "jsbeautifier.max_preserve_newlines": 10, 
-    "jsbeautifier.space_in_paren": false,
-    "jsbeautifier.space_in_empty_paren": false, 
-    "jsbeautifier.e4x": false,  
-    "jsbeautifier.jslint_happy": false,
-    "jsbeautifier.space_after_anon_function": false,
-    "jsbeautifier.brace_style": "collapse",   // "collapse" | "expand" | "end-expand".
-    "jsbeautifier.keep_array_indentation": false, 
-    "jsbeautifier.keep_function_indentation": false, 
-    "jsbeautifier.eval_code": false, 
-    "jsbeautifier.unescape_strings": false,
-    "jsbeautifier.wrap_line_length": 40, 
-    "jsbeautifier.unindent_chained_methods": false,
-    "jsbeautifier.break_chained_methods": false, 
-    "jsbeautifier.end_with_newline": false, 
-    "jsbeautifier.comma_first": false,     
-    "jsbeautifier.operator_position": "before-newline",  //before-newline, after-newline, preserve-newline
+    "jsbeautifier.option.indent_size": 4,
+    "jsbeautifier.option.indent_char": " ",
+    "jsbeautifier.option.indent_with_tabs": true, 
+    "jsbeautifier.option.eol": "\n", 
+    "jsbeautifier.option.preserve_newlines": false, 
+    "jsbeautifier.option.max_preserve_newlines": 10, 
+    "jsbeautifier.option.space_in_paren": false,
+    "jsbeautifier.option.space_in_empty_paren": false, 
+    "jsbeautifier.option.e4x": false,  
+    "jsbeautifier.option.jslint_happy": false,
+    "jsbeautifier.option.space_after_anon_function": false,
+    "jsbeautifier.option.brace_style": "collapse",   // "collapse" | "expand" | "end-expand".
+    "jsbeautifier.option.keep_array_indentation": false, 
+    "jsbeautifier.option.keep_function_indentation": false, 
+    "jsbeautifier.option.eval_code": false, 
+    "jsbeautifier.option.unescape_strings": false,
+    "jsbeautifier.option.wrap_line_length": 40, 
+    "jsbeautifier.option.unindent_chained_methods": false,
+    "jsbeautifier.option.break_chained_methods": false, 
+    "jsbeautifier.option.end_with_newline": false, 
+    "jsbeautifier.option.comma_first": false,     
+    "jsbeautifier.option.operator_position": "before-newline",  //before-newline, after-newline, preserve-newline
  
  
 
-    "beautiful_soup.file_types":["html","asp","xml"],
+    "beautiful_soup.file_types":["html","xml"],
     "beautiful_soup.indent_size": 4,
     
 
@@ -107,27 +108,26 @@
     "python_black.file_types": ["py"],
     "ptyhon_black.exe_path": "",// your_path/black.exe
 
-    //support: "css","less"
-    "css.file_types": ["css","less"],
-    "css.indent_size": 4, 
-    "css.indent_char": " ", 
-    "css.indent_with_tabs": false, 
-    "css.selector_separator_newline": false,
-    "css.end_with_newline": false, 
-    "css.newline_between_rules": false,
-    "css.space_around_combinator": false,
-    "css.eol": "\n", 
+    "cssbeautifier.file_types": ["css","less"],
+    "cssbeautifier.option.indent_size": 4, 
+    "cssbeautifier.option.indent_char": " ", 
+    "cssbeautifier.option.indent_with_tabs": false, 
+    "cssbeautifier.option.selector_separator_newline": false,
+    "cssbeautifier.option.end_with_newline": false, 
+    "cssbeautifier.option.newline_between_rules": false,
+    "cssbeautifier.option.space_around_combinator": false,
+    "cssbeautifier.option.eol": "\n", 
 
-    //support: "scss","sass"
-    "scss.file_types": ["scss","sass"], 
-    "scss.indent_size": 4, 
-    "scss.indent_char": " ",
-    "scss.indent_with_tabs": false,
-    "scss.selector_separator_newline": false,
-    "scss.end_with_newline": false, 
-    "scss.newline_between_rules": false,
-    "scss.space_around_combinator": false,
-    "scss.eol": "\n", 
+
+    "scssbeautifier.file_types": ["scss","sass"], 
+    "scssbeautifier.option.indent_size": 4, 
+    "scssbeautifier.option.indent_char": " ",
+    "scssbeautifier.option.indent_with_tabs": false,
+    "scssbeautifier.option.selector_separator_newline": false,
+    "scssbeautifier.option.end_with_newline": false, 
+    "scssbeautifier.option.newline_between_rules": false,
+    "scssbeautifier.option.space_around_combinator": false,
+    "scssbeautifier.option.eol": "\n", 
 
 
     //https://github.com/kodeclan/phpfmt

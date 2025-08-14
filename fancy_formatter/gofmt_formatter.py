@@ -15,5 +15,15 @@ class GofmtFormatter:
 
 
     def format_text(self, file_type:EFileType, text:str) -> Tuple[str,str]:
-        return execute_with_pipe(['gofmt'], text)
+        cmd=[]
+        
+        exe_path = self._setting.get("exe_path")
+        if exe_path:
+            if not os.path.exists(exe_path) or not os.path.isfile(exe_path):
+                return FormatResult.fatal_error(f"Can't find gofmt path: {exe_path}")
+        else:
+            exe_path = "gofmt"
+        cmd.append(exe_path)
+
+        return execute_with_pipe(cmd, text)
         
