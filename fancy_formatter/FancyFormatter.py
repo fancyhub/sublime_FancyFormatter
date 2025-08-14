@@ -11,7 +11,6 @@ from .base import *
 from .jsbeautifier_formatter import JsBeautifierFormatter
 from .gofmt_formatter import GofmtFormatter
 from .clang_format_formatter import ClangFormatFormatter
-from .html_formatter import HtmlFormatter
 from .python_black_formatter import PythonBlackFormatter
 from .php_cs_fixer_formatter import PhpCsFixerFormatter
 from .phpfmt_formatter import PhpfmtFormatter
@@ -24,7 +23,6 @@ map_settings_formatter = {
             'clang_format': ClangFormatFormatter,
             'gofmt': GofmtFormatter,
             'jsbeautifier': JsBeautifierFormatter,
-            "html": HtmlFormatter,
             "python_black":PythonBlackFormatter,
             "php_cs_fixer":PhpCsFixerFormatter,
             "css":CssFormatter,

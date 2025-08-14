@@ -3,7 +3,8 @@
     
     "file_type.json": "jsbeautifier",   //clang_format,prettier,jsbeautifier
     "file_type.proto": "clang_format",  //clang_format
-    "file_type.html": "beautiful_soup",       //prettier,beautiful_soup,html
+    "file_type.html": "prettier",  //prettier,beautiful_soup
+    "file_type.html": "prettier",       //prettier,beautiful_soup
     "file_type.css": "css",             //prettier,css
     "file_type.less": "css",            //prettier,css
     "file_type.scss": "scss",           //prettier,scss
@@ -46,7 +47,7 @@
     // https://prettier.io/
     // https://prettier.io/docs/install
     //options is copy from https://prettier.io/playground/
-    "prettier.file_types":["js","ts","json","css","less","scss","md","yaml","html"],    
+    "prettier.file_types":["js","ts","json","css","less","scss","md","yaml","html","xml"],    
     "prettier.exe_path":"", // xxx/prettier.cmd ,xxx/prettier
     "prettier.option.arrowParens": "always",
     "prettier.option.bracketSameLine": false,
@@ -96,19 +97,7 @@
     "jsbeautifier.comma_first": false,     
     "jsbeautifier.operator_position": "before-newline",  //before-newline, after-newline, preserve-newline
  
-    //"html","asp","xml"
-    "html.file_types": [], 
-    "html.indent_size": 4, 
-    "html.indent_char": " ", 
-    "html.indent_with_tabs": false,
-    "html.exception_on_tag_mismatch": false, 
-    "html.minimum_attribute_count": 2,
-    "html.first_attribute_on_new_line": false, 
-    "html.expand_tags": false, 
-    "html.reduce_empty_tags": false, 
-    "html.reduce_whole_word_tags": false, 
-    "html.custom_singletons": "", // Custom singleton tags for various template languages outside of the HTML5 spec
-
+ 
 
     "beautiful_soup.file_types":["html","asp","xml"],
     "beautiful_soup.indent_size": 4,

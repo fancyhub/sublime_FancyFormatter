@@ -17,6 +17,7 @@ class PrettierFormatter:
         self._debug = debug
         self._parser_map :Dict[EFileType,str]= {
             EFileType.HTML: "html",
+            EFileType.XML: "html",
 
             EFileType.TS: "typescript",
             EFileType.JS: "javascript",
@@ -31,7 +32,7 @@ class PrettierFormatter:
             EFileType.YAML:"yaml",
         }
         self._support_file_type_list :List[EFileType]= [
-            EFileType.HTML,
+            EFileType.HTML,EFileType.XML,
             EFileType.TS,EFileType.JS,EFileType.JSON,
             EFileType.MD,
             EFileType.CSS,EFileType.LESS,EFileType.SCSS,
