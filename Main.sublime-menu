@@ -35,11 +35,18 @@
 								"caption": "-"
 							},
 							{
-								"command": "open_file",
+								"command": "fancy_formatter_open_url",
 								"args": {
-									"file": "${packages}/FancyFormatter/README.md"
+									"url": "https://github.com/fancyhub/sublime_FancyFormatter"
 								},
 								"caption": "README"
+							},
+							{
+								"command": "fancy_formatter_open_url",
+								"args": {
+									"url": "https://github.com/fancyhub/sublime_FancyFormatter/issues"
+								},
+								"caption": "issues"
 							}
 						]
 					}

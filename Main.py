@@ -7,6 +7,7 @@ import re
 import sys
 import sublime
 import sublime_plugin
+import webbrowser
 from typing import Dict
 
 from .fancy_formatter.base import *
@@ -105,3 +106,12 @@ class FancyFormatterCommand(sublime_plugin.TextCommand):
             _show_error_dialog(result.ErrorMsg)
         else:
             print(f"FancyFormatter: {result.ErrorMsg}")
+
+
+class FancyFormatterOpenUrlCommand(sublime_plugin.ApplicationCommand):
+    re_pkgs = re.compile(r'^Packages')
+    def run(self, url):
+        if url.startswith('sub://Packages'):
+            sublime.run_command('open_file', {"file": self.re_pkgs.sub('${packages}', url[6:])})
+        else:
+            webbrowser.open_new_tab(url)

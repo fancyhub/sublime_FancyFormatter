@@ -59,6 +59,10 @@ class EFormatResult(Enum):
     Fatal = 2,
 
 class FormatResult:
+    Code : EFormatResult = EFormatResult.OK
+    Result :str =""
+    ErrorMsg :str =""
+
     def __init__(self, stdout:str="", stderr:str=""):
         self.Code : EFormatResult = EFormatResult.OK
         self.Result :str =stdout
