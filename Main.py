@@ -93,14 +93,15 @@ class FancyFormatterCommand(sublime_plugin.TextCommand):
             return 
         
         formatter= _get_fancy_formatter()
-        file_text = sublime.Region(0, view.size())
-        file_text_utf = view.substr(file_text)
-        if (len(file_text_utf) == 0):
+        file_text_region = sublime.Region(0, view.size())
+        file_text = view.substr(file_text_region)
+        if (len(file_text) == 0):
             return
 
-        result= formatter.format_text(file_type,file_text_utf)
+        result= formatter.format_text(file_type,file_text)
         if result.Code == EFormatResult.OK:
-            view.replace(edit, file_text, result.Result)
+            if file_text != result.Result:
+                view.replace(edit, file_text_region, result.Result)
             print("FancyFormatter: format succ")
         elif result.Code == EFormatResult.Fatal:
             _show_error_dialog(result.ErrorMsg)

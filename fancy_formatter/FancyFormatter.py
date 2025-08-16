@@ -9,8 +9,6 @@ from typing import Dict
 from .base import *
 
 from .jsbeautifier_formatter import JsBeautifierFormatter
-from .php_cs_fixer_formatter import PhpCsFixerFormatter
-from .phpfmt_formatter import PhpfmtFormatter
 from .beautiful_soup_formatter import BeautifulSoupFormatter
 from .cssbeautifier_formatter import CssbeautifierFormatter
 from .scssbeautifier_formatter import ScssbeautifierFormatter
@@ -19,12 +17,10 @@ from .custom_formatter import CustomFormatter
 
 map_settings_formatter = {
             'jsbeautifier': JsBeautifierFormatter,
-            "php_cs_fixer":PhpCsFixerFormatter,
             "cssbeautifier":CssbeautifierFormatter,
             "scssbeautifier":ScssbeautifierFormatter,
             "beautiful_soup":BeautifulSoupFormatter,
             "prettier":PrettierFormatter,
-            "phpfmt":PhpfmtFormatter,
 }
 
 class FancyFormatter:

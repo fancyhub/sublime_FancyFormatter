@@ -23,35 +23,10 @@
     "file_type.go": "gofmt",            //gofmt
     "file_type.py": "python_black",     //python_black
     "file_type.php":"php_cs_fixer",     //php_cs_fixer, phpfmt
-        
 
-    // https://prettier.io/
-    // https://prettier.io/docs/install
-    //options is copy from https://prettier.io/playground/
-    "prettier.file_types":["js","ts","json","css","less","scss","md","yaml","html","xml"],    
-    "prettier.exe_path":"", // xxx/prettier.cmd ,xxx/prettier
-    "prettier.option.arrowParens": "always",
-    "prettier.option.bracketSameLine": false,
-    "prettier.option.objectWrap": "preserve",
-    "prettier.option.bracketSpacing": true,
-    "prettier.option.semi": true,
-    "prettier.option.experimentalOperatorPosition": "end",
-    "prettier.option.experimentalTernaries": false,
-    "prettier.option.singleQuote": false,
-    "prettier.option.jsxSingleQuote": false,
-    "prettier.option.quoteProps": "as-needed",
-    "prettier.option.trailingComma": "all",
-    "prettier.option.singleAttributePerLine": false,
-    "prettier.option.htmlWhitespaceSensitivity": "css",
-    "prettier.option.vueIndentScriptAndStyle": false,
-    "prettier.option.proseWrap": "preserve",
-    "prettier.option.insertPragma": false,
-    "prettier.option.printWidth": 80,
-    "prettier.option.requirePragma": false,
-    "prettier.option.tabWidth": 4,
-    "prettier.option.useTabs": true,
-    "prettier.option.embeddedLanguageFormatting": "auto",
+    //you can add your self "file_type.xxx":"yyy"
 
+     
     //https://pypi.org/project/jsbeautifier/
     "jsbeautifier.file_types": ["js", "json"],    
     //https://beautifier.io/
@@ -102,27 +77,35 @@
     "scssbeautifier.option.newline_between_rules": false,
     "scssbeautifier.option.space_around_combinator": false,
     "scssbeautifier.option.eol": "\n", 
-
-
-    //https://github.com/kodeclan/phpfmt
-    "phpfmt.file_types": ["php"],
-    "phpfmt.php_path": "",
-    "phpfmt.path":"",  // /your_path/fmt.pchar
-    "phpfmt.option.psr1": false, 
-    "phpfmt.option.psr1_naming": false, 
-    "phpfmt.option.psr2": true, 
-    "phpfmt.option.indent_with_space": 4, 
-    "phpfmt.option.enable_auto_align": true, 
-    "phpfmt.option.visibility_order": true, 
-    "phpfmt.option.smart_linebreak_after_curly": true, 
-    "phpfmt.option.passes": [],
-    "phpfmt.option.excludes": [], 
-
     
-    "php_cs_fixer.file_types": ["php"],
-    "php_cs_fixer.php_path": "",
-    "php_cs_fixer.path":"",      // /your_path/php-cs-fixer.phar
-  
+
+    // https://prettier.io/
+    // https://prettier.io/docs/install
+    //options is copy from https://prettier.io/playground/
+    "prettier.file_types":["js","ts","json","css","less","scss","md","yaml","html","xml"],    
+    "prettier.exe_path":"", // xxx/prettier.cmd ,xxx/prettier
+    "prettier.option.arrowParens": "always",
+    "prettier.option.bracketSameLine": false,
+    "prettier.option.objectWrap": "preserve",
+    "prettier.option.bracketSpacing": true,
+    "prettier.option.semi": true,
+    "prettier.option.experimentalOperatorPosition": "end",
+    "prettier.option.experimentalTernaries": false,
+    "prettier.option.singleQuote": false,
+    "prettier.option.jsxSingleQuote": false,
+    "prettier.option.quoteProps": "as-needed",
+    "prettier.option.trailingComma": "all",
+    "prettier.option.singleAttributePerLine": false,
+    "prettier.option.htmlWhitespaceSensitivity": "css",
+    "prettier.option.vueIndentScriptAndStyle": false,
+    "prettier.option.proseWrap": "preserve",
+    "prettier.option.insertPragma": false,
+    "prettier.option.printWidth": 80,
+    "prettier.option.requirePragma": false,
+    "prettier.option.tabWidth": 4,
+    "prettier.option.useTabs": true,
+    "prettier.option.embeddedLanguageFormatting": "auto",
+
     //below is custom formmatter, you can add your self formatter 
 
     //windows: winget install --id=LLVM.ClangFormat -e   
@@ -131,7 +114,8 @@
         "exe_path":"clang-format",
         "args":["-assume-filename=file.{file_type}","-style=WebKit"],
         "need_create_template_file":false,
-        "result_from_file":false,
+        "result_from_template_file":false,
+        "keep_template_file":false,
     },
 
     "custom.gofmt":{
@@ -139,7 +123,8 @@
         "exe_path":"gofmt",
         "args":[],
         "need_create_template_file":false,
-        "result_from_file":false,
+        "result_from_template_file":false,
+        "keep_template_file":false,
     },
 
     //pip install black    
@@ -148,21 +133,22 @@
         "exe_path":"black",
         "args":["--quiet","-"],
         "need_create_template_file":false,
-        "result_from_file":false,
+        "result_from_template_file":false,
+        "keep_template_file":false,
     },
 
     // https://github.com/PHP-CS-Fixer/PHP-CS-Fixer
     "custom.php_cs_fixer":{
         "file_types": ["php"],
-        "exe_path":"php",
+        "exe_path":"c:/tools/php/php.exe",
         "args":[
-            "-ddisplay_errors=stderr",
-            "-dshort_open_tag=On",
-            "c:/php-cs-fixer.phar",
+            "c:/tools/php/php-cs-fixer.phar",
             "--quiet",
             "--using-cache=no",
-            "fix" ],
+            "--rules=@PSR12",
+            "fix"],
         "need_create_template_file":true,
-        "result_from_file":true,
+        "result_from_template_file":true,
+        "keep_template_file":false,
     },
 }

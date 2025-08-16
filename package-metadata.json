@@ -1,0 +1,14 @@
+{
+    "name": "FancyFormatter",
+    "version": "4.0.6",
+    "sublime_text": ">=4000",
+    "platforms": ["*"],
+    "python_version": "3.8",
+    "url": "https://github.com/fancyhub/sublime_FancyFormatter",
+    "issues": "https://github.com/fancyhub/sublime_FancyFormatter/issues",
+    "author": ["Cunyu Fan"],
+    "description": "Formatter for The Sublime Text 4",
+    "labels": [],
+    "libraries": [],
+    "release_time": "2025-08-16 09:11:12"
+}

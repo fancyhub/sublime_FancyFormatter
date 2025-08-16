@@ -39,7 +39,7 @@ class CustomFormatter(IBaseFormatter):
 
         # create temp file
         need_temp_file:bool= self._setting.get("need_create_template_file")
-        result_from_file:bool= self._setting.get("result_from_file")
+        result_from_file:bool= self._setting.get("result_from_template_file")
         temp_file_name:str=None
         if need_temp_file:
             with tempfile.NamedTemporaryFile(mode='w', suffix=f".{file_type.get_suffix()}", delete=False) as temp_file:
@@ -89,7 +89,7 @@ class CustomFormatter(IBaseFormatter):
         except Exception as e:
             return FormatResult.from_exception(e)
         finally:
-            if need_temp_file and os.path.exists(temp_file_name):
+            if need_temp_file and not self._setting.get("keep_template_file")==False and os.path.exists(temp_file_name):
                 os.remove(temp_file_name)     
         
     def _get_startupinfo(self):
