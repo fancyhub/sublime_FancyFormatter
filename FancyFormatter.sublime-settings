@@ -24,7 +24,7 @@
     "syntax.python": "python_black",     //python_black
     "syntax.php":"php_cs_fixer",     //php_cs_fixer, phpfmt
 
-    //you can add your self "file_type.xxx":"yyy"
+    //you can add yourself, like "syntax.sql":"sqlfmt"
 
      
     //https://pypi.org/project/jsbeautifier/
