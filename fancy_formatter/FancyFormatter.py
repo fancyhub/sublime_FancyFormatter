@@ -23,6 +23,13 @@ map_settings_formatter = {
             "prettier":PrettierFormatter,
 }
 
+def _format_syntax(syntax:str)->str:
+    syntax=syntax.strip().lower()
+    syntax=syntax.replace("(","")
+    syntax=syntax.replace(")","")
+    syntax=syntax.replace(" ","_")
+    return syntax
+
 class FancyFormatter:
     def __init__(self, setting:ISettingReader):
         self._setting = setting
@@ -30,8 +37,8 @@ class FancyFormatter:
         self._debug = setting.get("debug")
         if self._debug:
             print("FancyFormatter is in debug mode")
-           
-
+    
+    
     def _get_inner_formatter(self,formatter_name:str)->IBaseFormatter:
         global map_settings_formatter
         if not formatter_name:
@@ -66,38 +73,34 @@ class FancyFormatter:
             self._formatter_map[full_formatter_name]=ret        
         return ret
         
-    def format_text(self, file_type:EFileType, text:str) -> FormatResult:
-        formatter_name:str=self._setting.get(f"file_type.{file_type.get_suffix()}")
+    
+    def format_text(self, text:str,syntax:str) -> FormatResult:
+        syntax = _format_syntax(syntax)
+        formatter_name:str=self._setting.get(f"syntax.{syntax}")
         if not formatter_name:
-            return FormatResult.fatal_error(f"{file_type.get_suffix()} is not support 1")
+            return FormatResult.fatal_error(f"{syntax} is not support, please add syntax.{syntax} in FancyFormatter Setting")
 
         if "." in formatter_name:
-            return FormatResult.fatal_error(f"can't find the formatter ({formatter_name}) for {file_type.get_suffix()}")
+            return FormatResult.fatal_error(f"can't find the formatter ({formatter_name}) for {syntax}")
         
         formatter:IBaseFormatter = self._get_custom_formatter(formatter_name)
-        if formatter == None:       
+        if formatter == None:
             formatter= self._get_inner_formatter(formatter_name)
             if formatter is None:
-                return FormatResult.fatal_error(f"can't find the formatter ({formatter_name}) for {file_type.get_suffix()} 2")
-            elif self._debug:
-                print(f"get formatter {formatter_name}")
-        elif self._debug:
-            print(f"get custom formatter custom.{formatter_name}")        
-
-        if not formatter.is_support(file_type):
-            return FormatResult.fatal_error(f"formatter ({formatter_name}) is not support {file_type.get_suffix()}")
-        
+                return FormatResult.fatal_error(f"can't find the formatter ({formatter_name}) for {syntax}")
+            elif not formatter.is_support(syntax):
+                return FormatResult.fatal_error(f"formatter {formatter_name} is not support {syntax}")          
+        elif not formatter.is_support(syntax):
+            return FormatResult.fatal_error(f"formatter custom.{formatter_name} is not support {syntax}, please add support_syntaxes to formatter in setting")
+            
         if self._debug:
-            print(f"format file \"{file_type.get_suffix()}\" with formatter: \"{formatter.get_name()}\"")
+            print(f"format file \"{syntax}\" with formatter: \"{formatter.get_name()}\"")       
 
         try:
-            return formatter.format_text(file_type,text)
+            return formatter.format_text(text,syntax)
         except TypeError as e:
             traceback.print_exc()
             return FormatResult.from_exception(e)
         except Exception as e:
             traceback.print_exc()
             return FormatResult.from_exception(e)
-
-    def exists(self, file_type:EFileType)->bool:
-        return file_type in self._classmap 

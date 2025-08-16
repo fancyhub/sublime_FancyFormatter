@@ -1,7 +1,7 @@
 [
 	{
 		"id": "FancyFormatter",
-		"caption": "Format Document",
-		"command": "fancy_formatter"
+		"caption": "Fancy Format",
+		"command": "fancy_format"
 	}
 ]

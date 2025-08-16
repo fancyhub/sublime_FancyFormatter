@@ -13,32 +13,32 @@ from typing import Dict
 from .fancy_formatter.base import *
 from .fancy_formatter.FancyFormatter import FancyFormatter
 
- 
+
 _fancy_formatter:FancyFormatter = None
 _setting_reader:JsonSettingReader =None
-_syntax_map :Dict[str,EFileType]= {
-    "c#": EFileType.CS,
-    "php": EFileType.PHP,
-    "javascript": EFileType.JS,
-    "typescript": EFileType.TS,
-    "python": EFileType.PY,
-    "html": EFileType.HTML,
-    "css": EFileType.CSS,
-    "json": EFileType.JSON,
-    "xml": EFileType.XML,
-    "objectivе-c": EFileType.M,
-    "objectivе-c++": EFileType.MM,
-    "c": EFileType.C,
-    "c++": EFileType.CPP,
-    "go": EFileType.GO,
-    "java": EFileType.JAVA,
-    "less": EFileType.LESS,
-    "scss": EFileType.SCSS,
-    "sass": EFileType.SASS,
-    "protobuf": EFileType.PROTO,
-    "yaml": EFileType.YAML,
-    "markdown": EFileType.MD,
-}
+# _syntax_map :Dict[str,EFileType]= {
+#     "c#": EFileType.CS,
+#     "php": EFileType.PHP,
+#     "javascript": EFileType.JS,
+#     "typescript": EFileType.TS,
+#     "python": EFileType.PY,
+#     "html": EFileType.HTML,
+#     "css": EFileType.CSS,
+#     "json": EFileType.JSON,
+#     "xml": EFileType.XML,
+#     "objectivе-c": EFileType.M,
+#     "objectivе-c++": EFileType.MM,
+#     "c": EFileType.C,
+#     "c++": EFileType.CPP,
+#     "go": EFileType.GO,
+#     "java": EFileType.JAVA,
+#     "less": EFileType.LESS,
+#     "scss": EFileType.SCSS,
+#     "sass": EFileType.SASS,
+#     "protobuf": EFileType.PROTO,
+#     "yaml": EFileType.YAML,
+#     "markdown": EFileType.MD,
+# }
 
 def _get_setting_reader()->JsonSettingReader:
     global _setting_reader
@@ -79,18 +79,13 @@ def _show_error_dialog(text):
     sublime.error_message(f"FancyFormatter\n{text}")
     # print(f"FancyFormatter: {text}")
  
-class FancyFormatterCommand(sublime_plugin.TextCommand):
+class FancyFormatCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         view = self.view    
         if view.is_scratch():
             _show_error_dialog('File is scratch')
             return
         syntax = _get_syntax(view)
-        global _syntax_map
-        file_type = _syntax_map.get(syntax, EFileType.NONE)
-        if file_type == EFileType.NONE:
-            _show_error_dialog(f'Formatter for this file type ({syntax}) not found.')
-            return 
         
         formatter= _get_fancy_formatter()
         file_text_region = sublime.Region(0, view.size())
@@ -98,7 +93,7 @@ class FancyFormatterCommand(sublime_plugin.TextCommand):
         if (len(file_text) == 0):
             return
 
-        result= formatter.format_text(file_type,file_text)
+        result= formatter.format_text(file_text,syntax)
         if result.Code == EFormatResult.OK:
             if file_text != result.Result:
                 view.replace(edit, file_text_region, result.Result)

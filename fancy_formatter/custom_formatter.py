@@ -6,35 +6,46 @@ from .base import *
 import tempfile
 
 class CustomFormatter(IBaseFormatter):
-    _support_file_type_list :List[EFileType]=None
+    _support_syntax_list :List[str]=None
 
     def __init__(self,  name: str,setting:ISettingReader, debug : bool ):
         super().__init__(name,setting,debug)
 
-    def is_support(self,file_type:EFileType)->bool:
-        if self._support_file_type_list==None:
-            self._support_file_type_list=[]
-            for item in self._setting.get("file_types"):
-                self._support_file_type_list.append(EFileType.from_suffix(item))
+    def is_support(self,syntax:str)->bool:
+        if self._support_syntax_list==None:
+            self._support_syntax_list=[]
+            support_syntaxes:list[str]=self._setting.get("support_syntaxes")
+            for item in support_syntaxes:
+                temp=item.strip().lower()
+                if temp:
+                    self._support_syntax_list.append(temp)
 
-        return file_type in self._support_file_type_list 
+
+        return syntax in self._support_syntax_list 
     
     def get_name(self)->str:
         return "custom."+self._name
     
-    def format_text(self, file_type:EFileType, text:str) -> Tuple[str,str]:
-
+    def format_text(self, text:str,syntax:str) -> FormatResult:
         # check exe path    
         exe_path = self._setting.get("exe_path")
         if not exe_path:
             return FormatResult.fatal_error(f"Can't find formatter custom.{self._name}.exe_path: {exe_path}")
+       
 
         # compose cmd
+        file_ext=self._setting.get("file_ext."+syntax)
         cmd=[]   
         cmd.append(exe_path)
         args:List[str]=self._setting.get("args")
         for item in args:
-            cmd.append(item.replace("{file_type}",file_type.get_suffix()))
+            if "{file_ext}" in item:
+                if not file_ext:
+                    return FormatResult.fatal_error(f"Can't find file_ext.{syntax} in custom.{self._name}")
+                else:
+                    cmd.append(item.replace("{file_ext}",file_ext))
+            else:
+                cmd.append(item)
         
 
         # create temp file
@@ -42,7 +53,9 @@ class CustomFormatter(IBaseFormatter):
         result_from_file:bool= self._setting.get("result_from_template_file")
         temp_file_name:str=None
         if need_temp_file:
-            with tempfile.NamedTemporaryFile(mode='w', suffix=f".{file_type.get_suffix()}", delete=False) as temp_file:
+            if not file_ext:
+                return FormatResult.fatal_error(f"Can't find file_ext.{syntax} in custom.{self._name}")
+            with tempfile.NamedTemporaryFile(mode='w', suffix=f".{file_ext}", delete=False) as temp_file:
                 temp_file.write(text)
                 temp_file_name = temp_file.name
                 cmd.append(temp_file_name)

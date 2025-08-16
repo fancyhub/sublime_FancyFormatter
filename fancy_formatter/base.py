@@ -10,48 +10,6 @@ import traceback
 import sys
 import re
 
-@unique
-class EFileType(Enum):
-    NONE = 0    
-    C = auto()
-    CPP = auto()
-    PHP = auto()
-    JSON = auto()
-    JS = auto()
-    TS = auto()
-    HTML=auto()
-    XML=auto()
-    PY =auto()
-    CSS = auto()
-    LESS =auto()
-    SCSS =auto()
-    SASS =auto()
-    CS =auto()
-    PROTO=auto()
-    GO =auto()
-    JAVA=auto()
-    M=auto()
-    MM=auto()
-    MD=auto()
-    YAML=auto()
-    MAX = auto()
-
-
-    @classmethod
-    def from_suffix(cls:'FormatResult', s: str):
-        s_upper = s.upper()
-        for member in cls.__members__:
-            if member == s_upper:
-                return cls[member]
-        print(f"Invalid FileType: {s} ")
-        return EFileType.NONE    
-
-    def get_suffix(self)->str:
-        if self.value <= EFileType.NONE.value or self.value >= EFileType.MAX.value:
-            return ""
-        else:
-            return self.name.lower()
-
 class EFormatResult(Enum):
     OK = 0,
     ERROR = 1,
@@ -188,13 +146,13 @@ class IBaseFormatter:
     def get_name(self)->str:
         return self._name
     
-    def is_support(self,file_type:EFileType)->bool:
+    def is_support(self,syntax:str)->bool:
         return False
 
-    def format_text(self, file_type:EFileType,text:str) -> FormatResult:
+    def format_text(self, text:str,syntax:str) -> FormatResult:
         return "","error: not implemented"
 
-    def format_file(self,file_type:EFileType,file_path:str)->str:
+    def format_file(self,syntax:str,file_path:str)->str:
         return "error: not implemented"
     
 

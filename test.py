@@ -38,18 +38,17 @@ if __name__ == "__main__":
     reader = JsonSettingReader(data)
     formatter = FancyFormatter(reader)
 
-    test_dict:Dict[EFileType,str] = {
-        # EFileType.CSS:"xxx.css",
-        # EFileType.HTML:"xxx.html",
-        # EFileType.JS:"xxx.js",
-        # EFileType.TS:"xxx.ts",
-        # EFileType.JSON:"xxx.json",
-        # EFileType.MD:"xxx.md",
-        # EFileType.YAML:"xxx.yaml",
-        # EFileType.LESS:"xxx.less",
-        # EFileType.SCSS:"xxx.scss",  
-        # EFileType.PY:__file__,
-        EFileType.CS:r"C:\work\fancyhub\CmdLineGUI\CmdLineGUI\View\ExeView.cs",
+    test_dict:Dict[str,str] = {
+        # "css":"xxx.css",
+        # "html":"xxx.html",
+        # "xml":"xxx.xml",
+        # "javascript":"xxx.js",
+        # "typescript":"xxx.ts",
+        # "json":"xxx.json",
+        # "markdown":"xxx.md",
+        # "yaml":"xxx.yaml",
+        "python":__file__,
+        "c#":r"C:\work\fancyhub\CmdLineGUI\CmdLineGUI\View\ExeView.cs",
     }
 
     for type, path in test_dict.items():
@@ -57,14 +56,4 @@ if __name__ == "__main__":
         result= formatter.format_text(type, content)
         print(f"Format: {type}")
         result.print()
-
-    for type_name in EFileType.__members__:
-        file_type =EFileType.from_suffix(type_name)
-        if file_type == EFileType.NONE or file_type==EFileType.MAX:
-            continue
-
-        print(f"----------------- Format: {file_type} -----------------")
-        result= formatter.format_text(file_type, " ")
-        result.print()
-        print("\n\n")
 

@@ -21,16 +21,14 @@ class BeautifulSoupFormatter(IBaseFormatter):
 
     def __init__(self,  name: str,setting:ISettingReader, debug : bool ):
         super().__init__(name,setting,debug)
-        self._support_file_type_list :List[EFileType]= [EFileType.HTML,EFileType.ASP,EFileType.XML]
+        self._support_syntax_list :List[str]= ["html","xml"]
 
-    def is_support(self,file_type:EFileType)->bool:
+    def is_support(self,syntax:str)->bool:
         if not use_bs4:
             return False
-        return file_type in self._support_file_type_list
-    
-   
+        return syntax in self._support_syntax_list
 
-    def format_text(self, file_type:EFileType, text:str) -> FormatResult:
+    def format_text(self, text:str,syntax:str) -> FormatResult:
         p_indent_size = self._setting.get("indent_size")
         
         try:

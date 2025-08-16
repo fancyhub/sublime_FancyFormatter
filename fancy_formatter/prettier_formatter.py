@@ -14,33 +14,22 @@ class PrettierFormatter(IBaseFormatter):
 
     def __init__(self,  name: str,setting:ISettingReader, debug : bool ):
         super().__init__(name,setting,debug)
-        self._parser_map :Dict[EFileType,str]= {
-            EFileType.HTML: "html",
-            EFileType.XML: "html",
-
-            EFileType.TS: "typescript",
-            EFileType.JS: "javascript",
-            EFileType.JSON: "jsonc",
-
-            EFileType.MD:"markdown",
-
-            EFileType.CSS:"css",
-            EFileType.LESS:"less",
-            EFileType.SCSS:"scss",
-
-            EFileType.YAML:"yaml",
+        self._parser_map :Dict[str,str]= {
+            "xml": "html",             
+            "json": "jsonc"
         }
-        self._support_file_type_list :List[EFileType]= [
-            EFileType.HTML,EFileType.XML,
-            EFileType.TS,EFileType.JS,EFileType.JSON,
-            EFileType.MD,
-            EFileType.CSS,EFileType.LESS,EFileType.SCSS,
-            EFileType.YAML]
 
-    def is_support(self,file_type:EFileType)->bool:         
-        return file_type in self._support_file_type_list 
+        self._support_syntax_list :List[str]= [
+            "html","xml",
+            "typescript","javascript","json",
+            "markdown",
+            "css","less","scss",
+            "yaml"]
 
-    def format_text(self, file_type:EFileType, text:str) -> Tuple[str,str]:
+    def is_support(self,syntax:str)->bool:         
+        return syntax in self._support_syntax_list 
+
+    def format_text(self, text:str,syntax:str) -> FormatResult:
 
         cmd=[]
         exe_path = self._setting.get("exe_path")
@@ -56,7 +45,10 @@ class PrettierFormatter(IBaseFormatter):
         
         cmd.append(exe_path)
         cmd.append("--parser")
-        cmd.append(self._parser_map[file_type])
+        if syntax in self._parser_map:
+            cmd.append(self._parser_map[syntax])
+        else:
+            cmd.append(syntax)
 
         options_reader = self._setting.create_sub("option")
         for key in options_reader.get_keys():

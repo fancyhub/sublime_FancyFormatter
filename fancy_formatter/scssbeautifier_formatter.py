@@ -10,12 +10,12 @@ class ScssbeautifierFormatter(IBaseFormatter):
 
     def __init__(self, name: str, setting:ISettingReader, debug : bool ):
         super().__init__(name,setting,debug)
-        self._support_file_type_list :List[EFileType]=[EFileType.SCSS,EFileType.SASS]
+        self._support_syntax_list :List[str]=["scss","sass"]
 
-    def is_support(self,file_type:EFileType)->bool:         
-        return file_type in self._support_file_type_list  
+    def is_support(self,syntax:str)->bool:         
+        return syntax in self._support_syntax_list  
 
-    def format_text(self, file_type:EFileType, text:str) -> FormatResult:
+    def format_text(self, text:str,syntax:str) -> FormatResult:
 
         options = default_options()
         option_reader = self._setting.create_sub("option")

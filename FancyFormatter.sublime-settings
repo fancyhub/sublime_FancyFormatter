@@ -1,34 +1,34 @@
 {
     "debug": false,
     
-    "file_type.json": "jsbeautifier",   //clang_format,prettier,jsbeautifier
-    "file_type.proto": "clang_format",  //clang_format
-    "file_type.html": "prettier",       //prettier,beautiful_soup
-    "file_type.xml": "prettier",       //prettier,beautiful_soup
-    "file_type.css": "cssbeautifier",             //prettier,cssbeautifier
-    "file_type.less": "cssbeautifier",          //prettier,cssbeautifier
-    "file_type.scss": "scssbeautifier",           //prettier,scssbeautifier
-    "file_type.sass": "scssbeautifier",           //prettier,scssbeautifier
-    "file_type.md": "prettier",         //prettier
-    "file_type.yaml": "prettier",       //prettier
+    "syntax.json": "jsbeautifier",   //clang_format,prettier,jsbeautifier
+    "syntax.protobuf": "clang_format",  //clang_format
+    "syntax.html": "prettier",       //prettier,beautiful_soup
+    "syntax.xml": "prettier",       //prettier,beautiful_soup
+    "syntax.css": "cssbeautifier",             //prettier,cssbeautifier
+    "syntax.less": "cssbeautifier",          //prettier,cssbeautifier
+    "syntax.scss": "scssbeautifier",           //prettier,scssbeautifier
+    "syntax.sass": "scssbeautifier",           //prettier,scssbeautifier
+    "syntax.markdown": "prettier",         //prettier
+    "syntax.yaml": "prettier",       //prettier
 
-    "file_type.js": "jsbeautifier",        //prettier,clang_format,jsbeautifier
-    "file_type.ts": "clang_format",     //clang_format,prettier
-    "file_type.c": "clang_format",      //clang_format
-    "file_type.cpp": "clang_format",    //clang_format
-    "file_type.java": "clang_format",   //clang_format
-    "file_type.cs": "clang_format",     //clang_format
-    "file_type.m": "clang_format",      //clang_format
-    "file_type.mm": "clang_format",     //clang_format
-    "file_type.go": "gofmt",            //gofmt
-    "file_type.py": "python_black",     //python_black
-    "file_type.php":"php_cs_fixer",     //php_cs_fixer, phpfmt
+    "syntax.javascript": "jsbeautifier",        //prettier,clang_format,jsbeautifier
+    "syntax.typescript": "clang_format",     //clang_format,prettier
+    "syntax.c": "clang_format",      //clang_format
+    "syntax.c++": "clang_format",    //clang_format
+    "syntax.java": "clang_format",   //clang_format
+    "syntax.c#": "clang_format",     //clang_format
+    "syntax.objective-c": "clang_format",      //clang_format
+    "syntax.objective-c++": "clang_format",     //clang_format
+    "syntax.go": "gofmt",            //gofmt
+    "syntax.python": "python_black",     //python_black
+    "syntax.php":"php_cs_fixer",     //php_cs_fixer, phpfmt
 
     //you can add your self "file_type.xxx":"yyy"
 
      
     //https://pypi.org/project/jsbeautifier/
-    "jsbeautifier.file_types": ["js", "json"],    
+    "jsbeautifier.support_syntaxes": ["javascript", "json"],    
     //https://beautifier.io/
     "jsbeautifier.option.indent_size": 4,
     "jsbeautifier.option.indent_char": " ",
@@ -54,10 +54,10 @@
     "jsbeautifier.option.operator_position": "before-newline",  //before-newline, after-newline, preserve-newline
     
 
-    "beautiful_soup.file_types":["html","xml"],
+    "beautiful_soup.support_syntaxes":["html","xml"],
     "beautiful_soup.indent_size": 4,    
 
-    "cssbeautifier.file_types": ["css","less"],
+    "cssbeautifier.support_syntaxes": ["css","less"],
     "cssbeautifier.option.indent_size": 4, 
     "cssbeautifier.option.indent_char": " ", 
     "cssbeautifier.option.indent_with_tabs": false, 
@@ -68,7 +68,7 @@
     "cssbeautifier.option.eol": "\n", 
 
 
-    "scssbeautifier.file_types": ["scss","sass"], 
+    "scssbeautifier.support_syntaxes": ["scss","sass"], 
     "scssbeautifier.option.indent_size": 4, 
     "scssbeautifier.option.indent_char": " ",
     "scssbeautifier.option.indent_with_tabs": false,
@@ -82,7 +82,7 @@
     // https://prettier.io/
     // https://prettier.io/docs/install
     //options is copy from https://prettier.io/playground/
-    "prettier.file_types":["js","ts","json","css","less","scss","md","yaml","html","xml"],    
+    "prettier.support_syntaxes":["javascript","typescript","json","css","less","scss","markdown","yaml","html","xml"],    
     "prettier.exe_path":"", // xxx/prettier.cmd ,xxx/prettier
     "prettier.option.arrowParens": "always",
     "prettier.option.bracketSameLine": false,
@@ -110,16 +110,28 @@
 
     //windows: winget install --id=LLVM.ClangFormat -e   
     "custom.clang_format":{
-        "file_types":["cs","java", "js", "ts", "m", "mm", "c", "cpp","proto","json"],
+        "support_syntaxes":["c#","java", "javascript", "typescript", "objective-c", "objective-c++", "c", "c++","protobuf","json"],
         "exe_path":"clang-format",
-        "args":["-assume-filename=file.{file_type}","-style=WebKit"],
+        "args":["-assume-filename=file.{file_ext}","-style=WebKit"],
         "need_create_template_file":false,
         "result_from_template_file":false,
         "keep_template_file":false,
+
+        "file_ext.c#":"cs",
+        "file_ext.java":"java",
+        "file_ext.javascript":"js",
+        "file_ext.typescript":"ts",
+        "file_ext.objective-c":"m",
+        "file_ext.objective-c++":"mm",
+        "file_ext.c":"c",
+        "file_ext.c++":"cpp",
+        "file_ext.javascript":"js",
+        "file_ext.protobuf":"proto",
+        "file_ext.json":"json",
     },
 
     "custom.gofmt":{
-        "file_types":["go"],
+        "support_syntaxes":["go"],
         "exe_path":"gofmt",
         "args":[],
         "need_create_template_file":false,
@@ -129,7 +141,7 @@
 
     //pip install black    
     "custom.python_black":{
-        "file_types": ["py"],
+        "support_syntaxes": ["python"],
         "exe_path":"black",
         "args":["--quiet","-"],
         "need_create_template_file":false,
@@ -139,7 +151,7 @@
 
     // https://github.com/PHP-CS-Fixer/PHP-CS-Fixer
     "custom.php_cs_fixer":{
-        "file_types": ["php"],
+        "support_syntaxes": ["php"],
         "exe_path":"c:/tools/php/php.exe",
         "args":[
             "c:/tools/php/php-cs-fixer.phar",
