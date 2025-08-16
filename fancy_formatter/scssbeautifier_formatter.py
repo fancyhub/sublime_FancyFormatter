@@ -6,15 +6,14 @@ from .lib.cssbeautifier import *
 from .base import *
 
 
-class ScssbeautifierFormatter:
+class ScssbeautifierFormatter(IBaseFormatter):
 
-    def __init__(self, setting:ISettingReader, debug : bool ):
-        self._setting = setting
-        self._debug = debug
+    def __init__(self, name: str, setting:ISettingReader, debug : bool ):
+        super().__init__(name,setting,debug)
         self._support_file_type_list :List[EFileType]=[EFileType.SCSS,EFileType.SASS]
 
-    def get_support_file_type(self)->List[EFileType]:        
-        return self._support_file_type_list 
+    def is_support(self,file_type:EFileType)->bool:         
+        return file_type in self._support_file_type_list  
 
     def format_text(self, file_type:EFileType, text:str) -> FormatResult:
 

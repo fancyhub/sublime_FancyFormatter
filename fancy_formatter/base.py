@@ -38,7 +38,7 @@ class EFileType(Enum):
 
 
     @classmethod
-    def from_string(cls:'FormatResult', s: str):
+    def from_suffix(cls:'FormatResult', s: str):
         s_upper = s.upper()
         for member in cls.__members__:
             if member == s_upper:
@@ -123,7 +123,6 @@ class FormatResult:
 
         return FormatResult(stdout,stderr)
     
-    
 
 
 def execute_with_pipe(args:List[str], text:str)->FormatResult:
@@ -149,7 +148,7 @@ def execute_with_pipe(args:List[str], text:str)->FormatResult:
         else:
             return FormatResult.fatal_error(f"{e.strerror} : {args[0]} ?")
     except Exception as e:
-        return FormatResult.from_exception(e)        
+        return FormatResult.from_exception(e)
     
 # helloWorldHelloWorld -> hello-world-hello-world
 def camel_to_kebab(s):
@@ -162,15 +161,7 @@ def camel_to_kebab(s):
             result.append(char)
     return ''.join(result)
 
-class IBaseFormatter:
-    def get_support_file_type(self)->List[EFileType]:
-        pass 
 
-    def format_text(self, file_type:EFileType,text:str) -> FormatResult:
-        return "","error: not implemented"
-
-    def format_file(self,file_type:EFileType,file_path:str)->str:
-        return "error: not implemented"
 
     
 
@@ -184,6 +175,28 @@ class ISettingReader:
     def get_keys(self)->List[str]:
         return []
 
+class IBaseFormatter:
+    _name :str 
+    _setting:ISettingReader
+    _debug :bool
+
+    def __init__(self, name: str, setting:ISettingReader, debug : bool ):
+        self._name = name
+        self._setting = setting 
+        self._debug = debug
+
+    def get_name(self)->str:
+        return self._name
+    
+    def is_support(self,file_type:EFileType)->bool:
+        return False
+
+    def format_text(self, file_type:EFileType,text:str) -> FormatResult:
+        return "","error: not implemented"
+
+    def format_file(self,file_type:EFileType,file_path:str)->str:
+        return "error: not implemented"
+    
 
 class SubSettingReader(ISettingReader):
     def __init__(self, orig:ISettingReader,prefix:str):

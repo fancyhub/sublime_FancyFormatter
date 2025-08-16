@@ -38,7 +38,7 @@ if __name__ == "__main__":
     reader = JsonSettingReader(data)
     formatter = FancyFormatter(reader)
 
-    test_dict:Dict[EFileType,str]={
+    test_dict:Dict[EFileType,str] = {
         # EFileType.CSS:"xxx.css",
         # EFileType.HTML:"xxx.html",
         # EFileType.JS:"xxx.js",
@@ -49,16 +49,17 @@ if __name__ == "__main__":
         # EFileType.LESS:"xxx.less",
         # EFileType.SCSS:"xxx.scss",  
         # EFileType.PY:__file__,
+        EFileType.CS:r"C:\work\fancyhub\CmdLineGUI\CmdLineGUI\View\ExeView.cs",
     }
 
-    for t,path in test_dict:
+    for type, path in test_dict.items():
         content = read_file_to_string(path)
-        result= formatter.format_text(t, content)
-        print(f"Format: {t}")
+        result= formatter.format_text(type, content)
+        print(f"Format: {type}")
         result.print()
 
-    for t in EFileType.__members__:
-        file_type =EFileType.from_string(t)
+    for type_name in EFileType.__members__:
+        file_type =EFileType.from_suffix(type_name)
         if file_type == EFileType.NONE or file_type==EFileType.MAX:
             continue
 

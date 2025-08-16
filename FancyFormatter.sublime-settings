@@ -23,27 +23,7 @@
     "file_type.go": "gofmt",            //gofmt
     "file_type.py": "python_black",     //python_black
     "file_type.php":"php_cs_fixer",     //php_cs_fixer, phpfmt
-    
-
-    //windows: winget install --id=LLVM.ClangFormat -e 
-    
-    "clang_format.file_types": ["cs", "java", "js", "ts", "m", "mm", "c", "cpp","proto","json"],
-    "clang_format.exe_path":"",    
-    "clang_format.style": "Microsoft", //LLVM, Google, Chromium, Mozilla, WebKit, Microsoft, GNU or file:your_exe_path
-    "clang_format.style_cs":"",
-    "clang_format.style_java":"",
-    "clang_format.style_js":"",
-    "clang_format.style_ts":"",
-    "clang_format.style_json":"",
-    "clang_format.style_m":"",
-    "clang_format.style_mm":"",
-    "clang_format.style_c":"",
-    "clang_format.style_cpp":"",
-    "clang_format.style_proto":"",
- 
-    // 
-    "gofmt.file_types":["go"],
-    "gofmt.exe_path":"", 
+        
 
     // https://prettier.io/
     // https://prettier.io/docs/install
@@ -97,16 +77,10 @@
     "jsbeautifier.option.end_with_newline": false, 
     "jsbeautifier.option.comma_first": false,     
     "jsbeautifier.option.operator_position": "before-newline",  //before-newline, after-newline, preserve-newline
- 
- 
-
-    "beautiful_soup.file_types":["html","xml"],
-    "beautiful_soup.indent_size": 4,
     
 
-    //pip install black    
-    "python_black.file_types": ["py"],
-    "ptyhon_black.exe_path": "",// your_path/black.exe
+    "beautiful_soup.file_types":["html","xml"],
+    "beautiful_soup.indent_size": 4,    
 
     "cssbeautifier.file_types": ["css","less"],
     "cssbeautifier.option.indent_size": 4, 
@@ -144,8 +118,51 @@
     "phpfmt.option.passes": [],
     "phpfmt.option.excludes": [], 
 
-    // https://github.com/PHP-CS-Fixer/PHP-CS-Fixer
+    
     "php_cs_fixer.file_types": ["php"],
     "php_cs_fixer.php_path": "",
     "php_cs_fixer.path":"",      // /your_path/php-cs-fixer.phar
+  
+    //below is custom formmatter, you can add your self formatter 
+
+    //windows: winget install --id=LLVM.ClangFormat -e   
+    "custom.clang_format":{
+        "file_types":["cs","java", "js", "ts", "m", "mm", "c", "cpp","proto","json"],
+        "exe_path":"clang-format",
+        "args":["-assume-filename=file.{file_type}","-style=WebKit"],
+        "need_create_template_file":false,
+        "result_from_file":false,
+    },
+
+    "custom.gofmt":{
+        "file_types":["go"],
+        "exe_path":"gofmt",
+        "args":[],
+        "need_create_template_file":false,
+        "result_from_file":false,
+    },
+
+    //pip install black    
+    "custom.python_black":{
+        "file_types": ["py"],
+        "exe_path":"black",
+        "args":["--quiet","-"],
+        "need_create_template_file":false,
+        "result_from_file":false,
+    },
+
+    // https://github.com/PHP-CS-Fixer/PHP-CS-Fixer
+    "custom.php_cs_fixer":{
+        "file_types": ["php"],
+        "exe_path":"php",
+        "args":[
+            "-ddisplay_errors=stderr",
+            "-dshort_open_tag=On",
+            "c:/php-cs-fixer.phar",
+            "--quiet",
+            "--using-cache=no",
+            "fix" ],
+        "need_create_template_file":true,
+        "result_from_file":true,
+    },
 }

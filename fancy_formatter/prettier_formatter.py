@@ -10,11 +10,10 @@ from typing import Dict
 # https://prettier.io/
 # https://prettier.io/docs/install
 # https://prettier.io/playground/
-class PrettierFormatter:
+class PrettierFormatter(IBaseFormatter):
 
-    def __init__(self, setting:ISettingReader, debug : bool ):
-        self._setting = setting
-        self._debug = debug
+    def __init__(self,  name: str,setting:ISettingReader, debug : bool ):
+        super().__init__(name,setting,debug)
         self._parser_map :Dict[EFileType,str]= {
             EFileType.HTML: "html",
             EFileType.XML: "html",
@@ -38,8 +37,8 @@ class PrettierFormatter:
             EFileType.CSS,EFileType.LESS,EFileType.SCSS,
             EFileType.YAML]
 
-    def get_support_file_type(self)->List[EFileType]:        
-        return self._support_file_type_list
+    def is_support(self,file_type:EFileType)->bool:         
+        return file_type in self._support_file_type_list 
 
     def format_text(self, file_type:EFileType, text:str) -> Tuple[str,str]:
 
