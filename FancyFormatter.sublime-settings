@@ -102,7 +102,7 @@
             "--html-whitespace-sensitivity","css",
             "--vue-indent-script-and-style",
             "--prose-wrap","preserve",
-            "--insert-pragma",
+            //"--insert-pragma",
             "--print-width","80",
             //"--require-pragma",
             "--tab-width","4",
