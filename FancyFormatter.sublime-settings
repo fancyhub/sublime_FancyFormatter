@@ -78,35 +78,55 @@
     "scssbeautifier.option.space_around_combinator": false,
     "scssbeautifier.option.eol": "\n", 
     
+ 
 
+    //below is custom formmatter, you can add your self formatter
     // https://prettier.io/
     // https://prettier.io/docs/install
     //options is copy from https://prettier.io/playground/
-    "prettier.support_syntaxes":["javascript","typescript","json","css","less","scss","markdown","yaml","html","xml"],    
-    "prettier.exe_path":"", // xxx/prettier.cmd ,xxx/prettier
-    "prettier.option.arrowParens": "always",
-    "prettier.option.bracketSameLine": false,
-    "prettier.option.objectWrap": "preserve",
-    "prettier.option.bracketSpacing": true,
-    "prettier.option.semi": true,
-    "prettier.option.experimentalOperatorPosition": "end",
-    "prettier.option.experimentalTernaries": false,
-    "prettier.option.singleQuote": false,
-    "prettier.option.jsxSingleQuote": false,
-    "prettier.option.quoteProps": "as-needed",
-    "prettier.option.trailingComma": "all",
-    "prettier.option.singleAttributePerLine": false,
-    "prettier.option.htmlWhitespaceSensitivity": "css",
-    "prettier.option.vueIndentScriptAndStyle": false,
-    "prettier.option.proseWrap": "preserve",
-    "prettier.option.insertPragma": false,
-    "prettier.option.printWidth": 80,
-    "prettier.option.requirePragma": false,
-    "prettier.option.tabWidth": 4,
-    "prettier.option.useTabs": true,
-    "prettier.option.embeddedLanguageFormatting": "auto",
+    "custom.prettier":{
+        "support_syntaxes":["javascript","typescript","json","css","less","scss","markdown","yaml","html","xml"],
+        "exe_path":"prettier.cmd", // xxx/prettier.cmd ,xxx/prettier
+        "args":[
+            "--arrow-parens","always",
+            //"--bracket-same-line",  
+            "--object-wrap","preserve",
+            "--bracket-spacing",
+            "--semi",
+            "--experimental-operator-position","end",
+            //"--experimental-ternaries",
+            //"--jsx-single-quote",
+            "--quote-props", "as-needed",
+            "--trailing-comma", "all",
+            //"--single-attribute-perLine",
+            "--html-whitespace-sensitivity","css",
+            "--vue-indent-script-and-style",
+            "--prose-wrap","preserve",
+            "--insert-pragma",
+            "--print-width","80",
+            //"--require-pragma",
+            "--tab-width","4",
+            "--use-tabs",
+            "--embedded-language-formatting","auto",
+            "--parser","{parser}"
+        ],
+        "need_create_template_file":false,
+        "result_from_template_file":false,
+        "keep_template_file":false,
 
-    //below is custom formmatter, you can add your self formatter 
+        "parser":{
+            "javascript":"javascript",
+            "typescript":"typescript",
+            "json":"jsonc",
+            "css":"css",
+            "less":"css",
+            "scss":"css",
+            "markdown":"markdown",
+            "yaml":"yaml",
+            "html":"html",
+            "xml":"html",
+        },
+    },
 
     //windows: winget install --id=LLVM.ClangFormat -e   
     "custom.clang_format":{
@@ -116,18 +136,19 @@
         "need_create_template_file":false,
         "result_from_template_file":false,
         "keep_template_file":false,
-
-        "file_ext.c#":"cs",
-        "file_ext.java":"java",
-        "file_ext.javascript":"js",
-        "file_ext.typescript":"ts",
-        "file_ext.objective-c":"m",
-        "file_ext.objective-c++":"mm",
-        "file_ext.c":"c",
-        "file_ext.c++":"cpp",
-        "file_ext.javascript":"js",
-        "file_ext.protobuf":"proto",
-        "file_ext.json":"json",
+        "file_ext":{
+            "c#":"cs",
+            "java":"java",
+            "javascript":"js",
+            "typescript":"ts",
+            "objective-c":"m",
+            "objective-c++":"mm",
+            "c":"c",
+            "c++":"cpp",
+            "javascript":"js",
+            "protobuf":"proto",
+            "json":"json",
+        },
     },
 
     "custom.gofmt":{
