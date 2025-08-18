@@ -108,13 +108,13 @@
             "--tab-width","4",
             "--use-tabs",
             "--embedded-language-formatting","auto",
-            "--parser","{parser}"
+            "--parser","{placeholder_example_name}"
         ],
         "need_create_template_file":false,
         "result_from_template_file":false,
         "keep_template_file":false,
 
-        "parser":{
+        "placeholder_example_name":{
             "javascript":"javascript",
             "typescript":"typescript",
             "json":"jsonc",
