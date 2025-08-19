@@ -107,6 +107,7 @@
             //"--require-pragma",
             "--tab-width","4",
             "--use-tabs",
+            "--no-color",
             "--embedded-language-formatting","auto",
             "--parser","{placeholder_example_name}"
         ],
